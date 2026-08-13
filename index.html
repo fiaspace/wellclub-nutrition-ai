@@ -2041,7 +2041,12 @@ async function fetchWithTimeout(url, options, timeoutMs) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs || 20000);
   try {
-    return await fetch(url, Object.assign({}, options, { signal: controller.signal }));
+    // cache: 'no-store' WAJIB di sini — Apps Script Web App URL (/exec)
+    // me-redirect ke URL konten ber-hash yang berubah tiap kali di-deploy
+    // ulang. Tanpa ini, browser bisa memakai redirect LAMA yang ter-cache
+    // dan mengarah ke konten yang sudah tidak berlaku (404), padahal
+    // buka manual di address bar selalu dapat redirect yang fresh.
+    return await fetch(url, Object.assign({ cache: 'no-store' }, options, { signal: controller.signal }));
   } catch (err) {
     if (err.name === 'AbortError') {
       throw new Error('Koneksi ke server backend timeout (lebih dari ' + Math.round((timeoutMs || 20000) / 1000) + ' detik tanpa respons)');
