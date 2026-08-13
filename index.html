@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WellClub Nutrition AI — Rumah Atsiri Indonesia</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #7a9e7e;
+    --sage-light: #e8f0e9;
+    --sage-dark: #4a6b4e;
+    --earth: #b5895a;
+    --earth-light: #f5ede2;
+    --earth-dark: #7a5535;
+    --cream: #faf8f4;
+    --stone: #e8e4dc;
+    --text-dark: #2c2a24;
+    --text-mid: #5a5750;
+    --text-muted: #9a9590;
+    --lavender: #8b7fa8;
+    --lavender-light: #ede9f5;
+    --rose: #c47e82;
+    --rose-light: #f7ebe9;
+    --teal: #5a8a8a;
+    --teal-light: #e4f0f0;
+    --ember: #b5543f;
+    --ember-light: #f6e7e3;
+    --gold: #a8863f;
+    --gold-light: #f2ecda;
+  }
+
+  /* ── LANDING PAGE ─────────────────────────────────────────────── */
+  .landing {
+    min-height: calc(100vh - 65px);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 56px 24px 64px; text-align: center;
+    background: linear-gradient(180deg, var(--sage-light) 0%, var(--cream) 42%);
+  }
+  .landing-eyebrow {
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--sage-dark); font-weight: 600; margin-bottom: 14px;
+  }
+  .landing h2 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    font-size: 40px; color: var(--text-dark); max-width: 720px; line-height: 1.25;
+  }
+  .landing p.landing-sub {
+    margin-top: 14px; font-size: 15px; color: var(--text-mid);
+    max-width: 560px; line-height: 1.6;
+  }
+  .program-cards {
+    display: grid; grid-template-columns: repeat(3, minmax(220px, 280px));
+    gap: 22px; margin-top: 44px; width: 100%; max-width: 920px;
+  }
+  @media (max-width: 760px) {
+    .program-cards { grid-template-columns: 1fr; max-width: 380px; }
+    .landing h2 { font-size: 28px; }
+  }
+  .program-card {
+    background: #fff; border: 1px solid var(--stone); border-radius: 16px;
+    padding: 28px 22px; display: flex; flex-direction: column; align-items: center;
+    text-align: center; box-shadow: 0 2px 10px rgba(44,42,36,0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .program-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(44,42,36,0.09); }
+  .program-icon {
+    width: 52px; height: 52px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px;
+  }
+  .program-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+  .program-card p {
+    font-size: 12.5px; color: var(--text-mid); line-height: 1.55; margin-bottom: 20px; flex: 1;
+  }
+  .program-card button {
+    width: 100%; padding: 10px 14px; border-radius: 9px; border: none;
+    background: var(--sage-dark); color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s ease;
+  }
+  .program-card button:hover { background: var(--sage); }
+  .landing-footnote {
+    margin-top: 40px; font-size: 12px; color: var(--text-muted); max-width: 480px; line-height: 1.6;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-header {
+    background: linear-gradient(135deg, #2c3d2e 0%, #3d5040 100%);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 6px;
+  }
+  .logo-mark svg { width: 100%; height: 100%; display: block; }
+  .logo-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  .header-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 500; color: #f0ece0;
+    letter-spacing: 0.3px;
+  }
+
+  .header-text p {
+    font-size: 11px; color: rgba(240,236,224,0.6); font-weight: 300;
+    letter-spacing: 0.8px; text-transform: uppercase; margin-top: 1px;
+  }
+
+  .header-badges { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+  .header-badge {
+    background: rgba(122,158,126,0.25);
+    border: 1px solid rgba(122,158,126,0.5);
+    color: #a8c8ac;
+    font-size: 10px; font-weight: 500;
+    padding: 4px 10px; border-radius: 20px;
+    letter-spacing: 0.5px; white-space: nowrap;
+  }
+
+  .header-badge.pro {
+    background: rgba(212,200,154,0.18);
+    border-color: rgba(212,200,154,0.45);
+    color: #d4c89a;
+  }
+
+  .main-layout {
+    display: flex; flex: 1; overflow: hidden; height: calc(100vh - 65px); position: relative;
+  }
+
+  .sidebar-toggle-btn {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    color: #f0ece0; width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 16px; flex-shrink: 0; transition: background 0.15s;
+  }
+  .sidebar-toggle-btn:hover { background: rgba(255,255,255,0.22); }
+  @media (max-width: 480px) {
+    .header-badge.pro { display: none; }
+  }
+
+  .sidebar-backdrop {
+    display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0;
+    background: rgba(30,28,22,0.28); z-index: 49;
+  }
+  .sidebar-backdrop.open { display: block; }
+
+  .sidebar {
+    width: 218px; min-width: 218px;
+    background: #fff;
+    border-right: 1px solid var(--stone);
+    padding: 16px 12px;
+    overflow-y: auto;
+    position: fixed; top: 65px; left: 0; height: calc(100vh - 65px);
+    transform: translateX(-100%); transition: transform 0.22s ease;
+    z-index: 50; box-shadow: 6px 0 24px rgba(44,42,36,0.12);
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-section { margin-bottom: 18px; }
+
+  .sidebar-label {
+    font-size: 9px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 0 4px; margin-bottom: 4px;
+  }
+
+  .sidebar-sublabel {
+    font-size: 9.5px; color: var(--text-muted); font-weight: 400;
+    padding: 0 4px 8px; line-height: 1.4;
+  }
+
+  .category-btn {
+    width: 100%; text-align: left;
+    padding: 8px 10px; border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 400;
+    color: var(--text-mid);
+    display: flex; align-items: center; gap: 7px;
+    margin-bottom: 3px; transition: all 0.15s;
+    line-height: 1.3;
+  }
+
+  .category-btn:hover { background: var(--sage-light); color: var(--sage-dark); border-color: rgba(122,158,126,0.2); }
+  .category-btn.active { background: var(--sage-light); color: var(--sage-dark); border-color: rgba(122,158,126,0.4); font-weight: 500; }
+
+  .cat-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .sidebar-footer {
+    margin-top: 8px; padding: 10px; background: var(--gold-light);
+    border-radius: 10px; border: 1px solid rgba(168,134,63,0.25);
+  }
+  .sidebar-footer p { font-size: 10px; color: var(--earth-dark); line-height: 1.5; }
+  .sidebar-footer strong { color: var(--text-dark); }
+
+  .chat-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  .chat-messages {
+    flex: 1; overflow-y: auto; padding: 20px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    scroll-behavior: smooth;
+  }
+
+  .msg { display: flex; gap: 10px; max-width: 90%; animation: fadeIn 0.25s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg.bot { align-self: flex-start; }
+
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+  }
+
+  .msg.bot .msg-avatar { background: var(--sage-light); color: var(--sage-dark); }
+  .msg.user .msg-avatar { background: var(--earth-light); color: var(--earth-dark); }
+
+  .msg-bubble { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; max-width: 100%; }
+
+  .msg.bot .msg-bubble { background: #fff; border: 0.5px solid var(--stone); color: var(--text-dark); border-top-left-radius: 2px; }
+  .msg.user .msg-bubble { background: var(--sage-dark); color: #f0ece0; border-top-right-radius: 2px; }
+
+  .quick-replies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+  .qr-btn {
+    background: var(--sage-light); border: 1px solid rgba(122,158,126,0.35);
+    color: var(--sage-dark); font-size: 11px; font-weight: 500;
+    padding: 5px 11px; border-radius: 20px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .qr-btn:hover { background: var(--sage); color: #fff; border-color: var(--sage); }
+
+  /* Assessment / report cards */
+  .assessment-card {
+    background: var(--sage-light); border: 1px solid rgba(122,158,126,0.3);
+    border-radius: 12px; padding: 16px; margin-top: 10px;
+  }
+
+  .assessment-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600; color: var(--sage-dark);
+    margin-bottom: 4px;
+  }
+  .assessment-card .card-sub { font-size: 10.5px; color: var(--text-muted); margin-bottom: 10px; }
+
+  .assess-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 5px 0; border-bottom: 0.5px solid rgba(122,158,126,0.2);
+    font-size: 12px; gap: 10px;
+  }
+
+  .assess-row:last-child { border-bottom: none; }
+  .assess-label { color: var(--text-mid); flex-shrink: 0; }
+  .assess-val { font-weight: 500; color: var(--sage-dark); text-align: right; }
+
+  .risk-badge {
+    display: inline-block; font-size: 9.5px; font-weight: 600;
+    padding: 2px 8px; border-radius: 8px; margin-left: 6px; vertical-align: middle;
+  }
+  .risk-low { background: var(--sage-light); color: var(--sage-dark); }
+  .risk-mid { background: var(--gold-light); color: var(--earth-dark); }
+  .risk-high { background: var(--ember-light); color: var(--ember); }
+
+  .lifestyle-card {
+    background: #fff; border: 1px solid var(--stone);
+    border-radius: 12px; padding: 16px; margin-top: 10px;
+  }
+  .lifestyle-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 600; color: var(--teal); margin-bottom: 10px;
+  }
+  .lifestyle-item {
+    display: flex; gap: 9px; padding: 6px 0; font-size: 12px; line-height: 1.5;
+    border-bottom: 0.5px solid var(--stone);
+  }
+  .lifestyle-item:last-child { border-bottom: none; }
+  .lifestyle-icon {
+    width: 22px; height: 22px; border-radius: 7px; background: var(--teal-light);
+    color: var(--teal); display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0; font-weight: 600;
+  }
+  .lifestyle-item strong { display: block; color: var(--text-dark); font-weight: 500; }
+  .lifestyle-item span { color: var(--text-muted); font-size: 11px; }
+
+  .followup-card {
+    background: var(--gold-light); border: 1px solid rgba(168,134,63,0.3);
+    border-radius: 12px; padding: 16px; margin-top: 10px;
+  }
+  .followup-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 600; color: var(--earth-dark); margin-bottom: 4px;
+  }
+  .followup-card .card-sub { font-size: 10.5px; color: var(--earth-dark); opacity: 0.8; margin-bottom: 10px; }
+  .followup-step {
+    display: flex; gap: 10px; padding: 7px 0; align-items: flex-start;
+    border-bottom: 0.5px dashed rgba(168,134,63,0.3); font-size: 12px;
+  }
+  .followup-step:last-child { border-bottom: none; }
+  .fu-badge {
+    background: var(--earth-dark); color: #fff; font-size: 10px; font-weight: 600;
+    border-radius: 6px; padding: 3px 8px; white-space: nowrap; min-width: 58px; text-align: center;
+  }
+  .followup-step div strong { display: block; color: var(--text-dark); font-weight: 500; }
+  .followup-step div span { color: var(--text-mid); font-size: 11px; }
+
+  .meal-plan-card { background: #fff; border: 1px solid var(--stone); border-radius: 12px; padding: 14px; margin-top: 10px; }
+  .meal-plan-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: var(--earth-dark); margin-bottom: 2px; }
+  .meal-plan-card .card-sub { font-size: 10.5px; color: var(--text-muted); margin-bottom: 10px; }
+
+  .meal-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--stone); font-size: 12px; }
+  .meal-row:last-child { border-bottom: none; }
+
+  .meal-time {
+    font-size: 10px; font-weight: 500; color: var(--earth);
+    background: var(--earth-light); padding: 3px 7px;
+    border-radius: 6px; white-space: nowrap; min-width: 52px; text-align: center;
+  }
+
+  .meal-content { flex: 1; color: var(--text-dark); line-height: 1.4; }
+  .meal-content strong { color: var(--text-dark); font-weight: 500; display: block; }
+  .meal-content span { color: var(--text-muted); font-size: 11px; }
+
+  .tag-pill { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; margin-right: 4px; margin-top: 3px; }
+  .tag-sleep { background: var(--lavender-light); color: var(--lavender); }
+  .tag-mood { background: var(--rose-light); color: var(--rose); }
+  .tag-energy { background: var(--teal-light); color: var(--teal); }
+  .tag-longevity { background: var(--sage-light); color: var(--sage-dark); }
+  .tag-cardio { background: var(--ember-light); color: var(--ember); }
+
+  .disclaimer-note {
+    font-size: 10px; color: var(--text-muted); margin-top: 10px;
+    padding-top: 8px; border-top: 0.5px solid var(--stone); line-height: 1.5;
+  }
+
+  .typing { display: flex; gap: 4px; padding: 4px 2px; align-items: center; }
+  .typing span { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-5px)} }
+
+  .input-area { padding: 12px 20px; background: #fff; border-top: 1px solid var(--stone); display: flex; gap: 10px; align-items: flex-end; }
+  .input-wrap { flex: 1; position: relative; }
+
+  textarea {
+    width: 100%; resize: none; overflow: hidden;
+    border: 1px solid var(--stone); border-radius: 10px;
+    padding: 10px 14px; font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: var(--text-dark);
+    background: var(--cream); outline: none;
+    transition: border-color 0.15s; min-height: 40px; max-height: 100px; line-height: 1.5;
+  }
+
+  textarea:focus { border-color: var(--sage); }
+  textarea::placeholder { color: var(--text-muted); }
+
+  .send-btn {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--sage-dark); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .send-btn:hover { background: var(--sage); }
+  .send-btn svg { width: 16px; height: 16px; fill: #fff; }
+
+  .context-bar {
+    background: #fff; border-bottom: 1px solid var(--stone);
+    padding: 8px 24px; display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--text-muted); overflow-x: auto; white-space: nowrap;
+  }
+
+  .ctx-chip { background: var(--stone); color: var(--text-mid); padding: 3px 9px; border-radius: 10px; font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+  .ctx-chip:hover { background: var(--sage-light); color: var(--sage-dark); }
+  .ctx-chip.active { background: var(--sage-dark); color: #fff; }
+
+  .section-divider { text-align: center; font-size: 10px; color: var(--text-muted); letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 0; font-weight: 500; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--stone); border-radius: 2px; }
+
+  .info-tag { font-size: 10px; color: var(--text-muted); margin-top: 3px; padding-left: 2px; }
+
+  /* Printable client summary — hidden unless printing */
+  #printSummary { display: none; }
+
+  @media print {
+    .app-header, .sidebar, .context-bar, .input-area, .qr-btn, .quick-replies, .dashboard-view, .passcode-overlay { display: none !important; }
+    body, .main-layout, .chat-area { height: auto !important; overflow: visible !important; background: #fff !important; }
+    .chat-messages { display: none !important; }
+    #printSummary { display: block !important; padding: 24px; }
+  }
+
+  .print-header {
+    display: flex; align-items: center; gap: 12px; border-bottom: 2px solid var(--sage-dark);
+    padding-bottom: 12px; margin-bottom: 16px;
+  }
+  .print-header .pmark {
+    width: 44px; height: 44px; border-radius: 10px; background: #fff;
+    display: flex; align-items: center; justify-content: center; padding: 6px;
+    border: 1px solid var(--stone);
+  }
+  .print-header .pmark svg { width: 100%; height: 100%; display: block; }
+  .print-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--sage-dark); }
+  .print-header p { font-size: 11px; color: var(--text-muted); }
+
+  /* ===== Nutritionist passcode gate ===== */
+  .passcode-overlay { position: fixed; inset: 0; background: rgba(44,42,36,0.55); display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .passcode-box { background: #fff; border-radius: 14px; padding: 28px; width: 320px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+  .passcode-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--sage-dark); margin-bottom: 6px; }
+  .passcode-box p { font-size: 11.5px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
+  .passcode-box input { width: 100%; padding: 9px 12px; border: 1px solid var(--stone); border-radius: 8px; font-size: 13px; margin-bottom: 4px; outline: none; text-align: center; letter-spacing: 2px; font-family: 'DM Sans', sans-serif; }
+  .passcode-box input:focus { border-color: var(--sage); }
+  .passcode-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .passcode-actions button { flex: 1; padding: 8px; border-radius: 8px; border: none; font-size: 12px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .passcode-actions button.pc-cancel { background: var(--stone); color: var(--text-mid); }
+  .passcode-actions button.pc-submit { background: var(--sage-dark); color: #fff; }
+  .passcode-error { font-size: 11px; color: var(--ember); margin-top: 8px; min-height: 14px; }
+
+  /* ===== Nutritionist dashboard ===== */
+  .dashboard-view { display: none; flex-direction: column; height: calc(100vh - 65px); overflow-y: auto; background: var(--cream); padding: 18px 26px; }
+  .dash-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .dash-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--sage-dark); }
+  .dash-actions { display: flex; gap: 8px; }
+  .dash-actions button { padding: 7px 13px; border-radius: 8px; border: 1px solid var(--stone); background: #fff; font-size: 11.5px; font-weight: 500; cursor: pointer; color: var(--text-mid); font-family: 'DM Sans', sans-serif; }
+  .dash-actions button:hover { background: var(--sage-light); border-color: rgba(122,158,126,0.4); color: var(--sage-dark); }
+
+  .dash-stats { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .stat-card { background: #fff; border: 1px solid var(--stone); border-radius: 12px; padding: 14px 20px; min-width: 120px; }
+  .stat-card .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--sage-dark); }
+  .stat-card.risk-high .stat-num { color: var(--ember); }
+  .stat-card.risk-mid .stat-num { color: var(--earth-dark); }
+  .stat-card .stat-label { font-size: 10.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  .dash-table-wrap { background: #fff; border: 1px solid var(--stone); border-radius: 12px; overflow: hidden; }
+  .client-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .client-table th { text-align: left; background: var(--sage-light); color: var(--sage-dark); font-weight: 600; padding: 10px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .client-table td { padding: 10px 14px; border-top: 1px solid var(--stone); vertical-align: middle; color: var(--text-dark); }
+  .muted-sm { font-size: 10.5px; color: var(--text-muted); }
+  .overdue-text { color: var(--ember); font-weight: 600; }
+  .detail-btn { background: var(--sage-dark); color: #fff; border: none; padding: 6px 12px; border-radius: 7px; font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .detail-btn:hover { background: var(--sage); }
+
+  .client-detail-panel { display: none; margin-top: 18px; background: #fff; border: 1px solid var(--stone); border-radius: 12px; padding: 18px; }
+  .detail-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .detail-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--sage-dark); }
+  .detail-close { background: var(--stone); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; cursor: pointer; color: var(--text-mid); }
+
+  .header-badge.nutri-btn { cursor: pointer; }
+  .header-badge.nutri-btn:hover { background: rgba(122,158,126,0.35); }
+
+  /* Ikon akses nutritionist — sengaja dibuat kecil & tidak mencolok,
+     mengambang di pojok layar, konsisten muncul baik di landing page
+     maupun di halaman chatbot, supaya transisinya terasa menyatu (seamless)
+     alih-alih terasa seperti tombol "admin" yang terpisah. */
+  .nutri-fab {
+    position: fixed; bottom: 18px; right: 18px; z-index: 500;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; cursor: pointer;
+    background: rgba(255,255,255,0.55); color: var(--text-muted);
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0.45; transition: opacity 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+  .nutri-fab:hover { opacity: 1; background: #fff; transform: scale(1.06); }
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="logo-mark" onclick="backToLanding()" style="cursor:pointer;" title="Kembali ke halaman utama">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU4AAAFOCAYAAADpU/RpAAAPnElEQVR4nO3dv4vk9X8H8LnNLnv7YYbzQ3YWl2Q38r0is4UEZgrlUFAIItjkW2xhp120uDQ2Z2HA4mysLqClprIQvqmEb+eBIlrMELDYgeAXOSErOxfGyw6f9bhlL0UwyDd67szn9fm183j8Ac99VU/21/M9rRYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAsS4V/QV+/7vN54r+GgA/OZhm/z6eZj8U+TVWiwxvtVqtf/jdX35a9NcA+D9/aj0/nma3i/wSK0WGA1xEihNgTooTYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6Fv8eZ13ia3Xpn+N0/VX0H9TPotrev/91f/WfenPE0u/Vvf/qvf464ifxuDHamVd/wW2pfnPBremnydETO54f//S9FvxjOxeJHdRqrv9V+IyJneHT8TUQOy0Nx0ki7nfWNzctr1/Lm3Dm+/3F2evYw4iaWh+KkkfbSpBeR8/nhvXciclguipNGemb7yo2InINpNo7IYbkoThonWV25tNtZ38+bc/fHB1/cOb5/EnETy0Vx0jiDrc7ViJzR0ezdiByWj+Kkcfrddu7vNlutVms4mX0akcPyUZw0zl6avJY34+T07Dv/u8miFCeNMui2tzdWV3by5gwnx29H3MNyUpw0StRaaDw9uR2Rw3JSnDSKtRB1oDhpjKi10Hia3bIWIg/FSWNErYVGk9mHETksL8VJY0SthYaT2dcROSwvxUkjRK6F7p48OI24ieWlOGkEayHqRHHSCL1047mIHGshIihOGmHQ7byVN8NaiCiKk9rrpclj1kLUieKk9gbd9vMROdZCRFGc1J61EHWjOKm1zY211Yi10Ggye9NaiCiKk1obdNtPRuSMp9kfI3Kg1VKc1Fy/234lIsdaiEiKk9pKVlcu9dLket6cO8f3P7YWIpLipLai1kLjafZRRA78RHFSW1Froc8O7/n9JqEUJ7UVtRbyEcBEU5zUkrUQdaY4qaWotdDoaPZJRA78nOKklqLWQgfT7PuIHPg5xUntWAtRd4qT2rEWou4UJ7VjLUTdKU5qxVqIJlCc1Iq1EE2gOKkVayGaQHFSK9ZCNIHipDashWgKxUltWAvRFIqT2uilycsROcPJ7DAiB36N4qQWNjfWVnc76/t5c0aT2ZsR98CjKE5qIWotNJrMPo7IgUdRnNRCL01ejMg5mGbfRuTAoyhOKpesrlzqd9s38+ZYC1EWxUnl9tLk8Yic0WT2XkQO/BbFSeX6W+2XInKGk+OvInLgtyhOKhexFrr744MvrIUoi+KkUrud9Y2ItdB4mn0QcQ+ch+KkUs9uXwn5a7q1EGVSnFTKWogmUpxUxlqIplKcVMZaiKZSnFTGWoimUpxUwlqIJlOcVMJaiCZTnFTCWogmU5xUwlqIJlOclC5qLTQ6mr0bcQ/MS3FSuqi10HiafRmRA/NSnJQuYi10cnr2nbUQVVGclCpqLXQwzd6PuAcWoTgplbUQF4HipFRRa6Hh0fE3ETmwCMVJqaLWQtnp2cOIe2ARipPSDLrt7Yiczw/vvRORA4tSnJQmai10MM3GETmwKMVJaXpp8mreDGsh6kBxUordzvrG5uW1a3lzrIWoA8VJKQbdzlMROdZC1IHipBT9bvv1vBnWQtSF4qRw1kJcNIqTwu2lyRMROdZC1IXipHD9bjv3d5utlrUQ9aE4KZy1EBeN4qRQ1kJcRIqTQsV9ttDs64gciKA4KVTUWshHAFMnipPCWAtxUSlOChO1FhpOZp9G5EAUxUlhotZC42n2Q8A5EEZxUoiotdBwcvx2xD0QSXFSiKi10Hh6cjsiByIpTgphLcRFpjgpRMRaaDzNblkLUUeKk3BRa6HRZPZhRA5EU5yEsxbiolOchLMW4qJTnISyFmIZKE5C7aVJLyLHWog6U5yEemb7yo28GdZC1J3iJEyyunLJWohloDgJM9jqXI3IGR3NPonIgaIoTsJErYUOptn3ETlQFMVJmL00eS1vxmgye9NaiLpTnIQYdNvbG6srO3lzxtPsjxH3QJEUJyF6afJ0RI61EE2gOAnR32q/kTfjzvH9j62FaALFSW5Ra6HxNPso4h4omuIkt6i10GeH9/x+k0ZQnOQWtRa6c3z/JOIeKJriJBdrIZaR4iQXayGWkeIkF2shlpHiJBdrIZaR4mRh1kIsK8XJwqyFWFaKk4VZC7GsFCcLsRZimSlOFmItxDJTnCwkYi1098cHX1gL0USKk7lFrYXG0+yDiHugbIqTuVkLsewUJ3OLWgsNJ7PDiBwom+JkblFroYhboAqrVR9As/TS5LGItdDdkwfjXpo8FnASlE5xMpdBt/18RM4Lu+kfXthNI6KgdH5UZy4RayFoOsXJuW1urK1GrIWg6RQn5zbotp+s+gaoA8XJufW77VeqvgHqQHFyLsnqyqVemlyv+g6oA8XJuUStheAiUJycy+bltb+u+gaoC8XJuQwnx19VfQPUheLkXO4c3z85OT37ruo7oA4UJ+c2nBy/XfUNUAeKk3PzDBz8L8XJuR1Ms++rvgHqQHFybtnp2UPPwYHiZE7jaebD1Vh6ipO5DCezr6u+AaqmOJnL3ZMHp3d/fPBF1XdAlTxkzNxGR7N3X9hN/5An4+T07Lt/vP0fu1E3cXH869//7cOqb/gtvuNkbsPJ7NO8GRurKzs+OoOmUpzMbTzNfohYEUV9DAeUTXGykINp9n7ejF6avBxxC5RNcbKQ0WT2cd6M3c76/ubGmt+z0ziKk4UMj46/icjxcRw0keJkIdnp2cM7x/dzf9fZS5MXI+6BMilOFjaazN7Lm9Hvtm8mqyuXIu6BsihOFhb1uPFemjwekQNlUZws7M7x/ZOIFVF/q/1SxD1QFsVJLuNp9kHejF6avBpxC5RFcZJLxOPGm5fXru121jci7oEyKE5yGU5mhxE5g27nqYgcKIPiJLeIx4373fbrEbdAGRQnuUU8bmxFRJMoTnKLetx4L02eiMiBoilOcrt78uA0YkXU77b3I+6BoilOQoyn2Ud5M/rd9s2IW6BoipMQEY8bt1qt1qDb3o7IgSIpTkJEPW7cS5OnI+6BIilOwgwnx2/nzehvtd+IuAWKpDgJM56e3M6bYUVEEyhOwkQ9bryXJr2IHCiK4iRM1OPGz2xfuRFxDxRFcRLq88N77+TN2O2s73vcmDpTnIQ6mGbjiJzBVudqRA4UQXESKupx41668VzAOVAIxUm40dHs3bwZg27nrYhboAiKk3DjafZl3oyN1ZWdXpo8FnAOhFOchIt73Lj9fEQORFOcFCLkcWMrImpKcVKI0WSW+/85Ny+vXfO4MXWkOCnEwTT7NiJn0G0/GZEDkRQnhQh83PiVgHMglOKkMBGPG/fS5LoVEXWjOCnMZ4f3cn+IW6vVau2lyeMRORBFcVKYO8f3TyIeN+5vtV+KuAeiKE4KFfG4sRURdaM4KVTE48Ybqys7HjemThQnhYp63PjZ7SsvRuRABMVJobLTs4fjaXYrb04vTV6OuAciKE4KN5rMPsybsdtZ37cioi4UJ4UbTmZfR+TspckTETmQl+KkcHdPHpxGPG7c77b3I+6BvBQnpYh43Ljfbd+MuAXyUpyUIuJx41ar1Rp029sROZCH4qQUw8ns0IqIi0JxUpqDafZ+3oxemrwacQvkoTgpTdTjxlZEVE1xUpq4x407T0XkwKIUJ6UJfNz49Yh7YFGKk1KNJrP38mbsdtb3PW5MlRQnpRpOjr+KyBlsda5G5MAiFCelCnvc2IqICilOShfxuPFemrwWcQssQnFSutHR7JO8GRurKztWRFRFcVK6g2n2fUROL02ejsiBeSlOSpednj0cTWZv5s3pb7XfiLgH5qU4qcR4muX+6ODNy2vXPG5MFRQnlYh63HjQbT8ZkQPzUJxUIvBx41cCzoG5KE4qE/G4cS9NrlsRUTbFSWWGk9mnETlWRJRNcVKZ8TT7IWJF1Es3ngs4B85NcVKpiMeNB93OWxG3wHkpTioV8bjxxurKjseNKZPipFLDo+NvInKe3b7yYkQOnIfipFLZ6dnDiMeNe2nycsQ9cB6Kk8pFPW5sRURZFCeVC3vc2IqIkihOKnfn+P5JxIqolyZ+z0kpFCe1MJ5mH+TN6HfbN62IKIPipBYiHjdutVqtvTR5PCIHHkVxUgvDyewwIqe/1X4pIgceRXFSGxGPG/fS5NWIW+BRFCe1EfW4sRURRVOc1Ebc48adpyJy4NcoTmrj7smD04gVUb/bfj3iHvg1ipNaGU+zj/JmWBFRNMVJrUQ9bryXJk9E5MAvUZzUStTjxv1uez/iHvglipPaGU6O386bsZcmr0XcAr9EcVI74+nJ7bwZG6srO4NuezvgHPh/FCe1E/W4cS9Nno7IgT+nOKmdqMeN+1vtNyLugT+nOKmlzw/vvZM3w4qIoihOaulgmo0jcvbSpBeRAz+nOKmlqMeNn9m+ciPiHvg5xUltjY5m7+bN2O2s73vcmGiKk9oaT7MvI3IGW52rETnwE8VJbUU9btxLN56LyIGfKE5qLeJx40G381bELfATxUmtjSaz3P/PubG6stNLk8cCzoFWq6U4qbmDafZtRM6g234+IgdaLcVJzYU9bmxFRCDFSe1FPG68eXntmseNiaI4qb3PDu/l/hC3VqvVGnTbT0bkgOKk9u4c3z+JeNy4lyYvRtwDipNGiHjcuN9t37QiIoLipBEiHjdutVqtvTR5PCKH5aY4aYSox437W+2XInJYboqTRshOzx6Op9mtvDlWRERQnDTGaDL7MG/GxurKjseNyUtx0hjDyezriJxnt6/46zq5KE4a4+7Jg9OIx417afJyxD0sL8VJo0Q9bmxFRB6Kk0aJetx4L02eiMhhOSlOGmU4mR1GrIj63fZ+xD0sJ8VJ4xxMs/fzZvS77ZsRt7CcFCeNE/G4cavVag267e2IHJaP4qRxoh43tiJiUYqTxol63LiXJq9G3MPyUZw00mgyey9vxubltWtWRCxCcdJIw8nxVxE5e2nSi8hhuShOGinqceNntq/ciLiH5aI4aayIx413O+v7HjdmXoqTxhodzT6JyBlsda5G5LA8ar/X/ZvO5d/fGOxUfQY1lKz+Rcj/Yb6wk97cvLyW+49NLI/aF+fG6spOL02uV30HF9duZ31/t7Nugsm5+VEdYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6KE2BOihNgTooTYE6KE2BOihMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoGb+B16PAn/dQYFrAAAAAElFTkSuQmCC" alt="Logo Rumah Atsiri Indonesia">
+  </div>
+  <div class="header-text" onclick="backToLanding()" style="cursor:pointer;" title="Kembali ke halaman utama">
+    <h1>WellClub Nutrition AI</h1>
+    <p>Rumah Atsiri Indonesia</p>
+  </div>
+  <div class="header-badges">
+    <div class="header-badge pro">Nutritionist-Guided Program</div>
+    <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="Menu kategori & tools" aria-label="Buka menu">☰</button>
+  </div>
+</div>
+
+<div class="nutri-fab" onclick="openNutritionistGate()" title="Akses Nutritionist">🔒</div>
+
+<div class="landing" id="landingPage">
+  <div class="landing-eyebrow">WellClub Nutrition · Rumah Atsiri Indonesia</div>
+  <h2>Halo, terima kasih sudah menjadi bagian dari program WellClub. Yuk lanjutkan perjalanan sehat Anda bersama kami.</h2>
+  <p class="landing-sub">Pilih program yang paling sesuai dengan kondisi Anda saat ini, dan mulai sesi konsultasi singkat bersama Tim Wellclub Rumah Atsiri Indonesia.</p>
+
+  <div class="program-cards">
+    <div class="program-card">
+      <div class="program-icon" style="background:var(--sage-light);color:var(--sage-dark);">🌿</div>
+      <h3>Wellness Lifestyle</h3>
+      <p>Evaluasi pola makan, aktivitas, dan gaya hidup harian untuk menjaga kondisi tubuh tetap optimal.</p>
+      <button onclick="enterProgram('wellness')">Coba Konsultasi</button>
+    </div>
+    <div class="program-card">
+      <div class="program-icon" style="background:var(--lavender-light);color:var(--lavender);">🧘</div>
+      <h3>Mental Wellness</h3>
+      <p>Dukungan untuk kualitas tidur, pemulihan energi, dan keseimbangan stres sehari-hari.</p>
+      <button onclick="enterProgram('sleep')">Coba Konsultasi</button>
+    </div>
+    <div class="program-card">
+      <div class="program-icon" style="background:var(--rose-light);color:var(--rose);">💚</div>
+      <h3>Longevity</h3>
+      <p>Pendampingan nutrisi untuk kondisi jangka panjang sebagai pencegahan penyakit kronis (stroke, diabetes, dan hipertensi).</p>
+      <button onclick="enterProgram('stroke')">Coba Konsultasi</button>
+    </div>
+  </div>
+
+  <p class="landing-footnote">Setiap program mencakup evaluasi awal &amp; follow-up terjadwal minimal 1x per bulan bersama tim nutritionist WellClub.</p>
+</div>
+
+<div class="main-layout" id="mainLayout" style="display:none;">
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebarPanel">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Wellness Lifestyle</div>
+      <button class="category-btn active" onclick="setCategory('wellness'); closeSidebar();" id="cat-wellness">
+        <div class="cat-dot" style="background:#7a9e7e"></div>Wellness Lifestyle
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Mental Wellness</div>
+      <button class="category-btn" onclick="setCategory('sleep'); closeSidebar();" id="cat-sleep">
+        <div class="cat-dot" style="background:#8b7fa8"></div>Better Sleep
+      </button>
+      <button class="category-btn" onclick="setCategory('recharge'); closeSidebar();" id="cat-recharge">
+        <div class="cat-dot" style="background:#5a8a8a"></div>Recharge & Rebalance
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Longevity</div>
+      <button class="category-btn" onclick="setCategory('stroke'); closeSidebar();" id="cat-stroke">
+        <div class="cat-dot" style="background:#534AB7"></div>Stroke
+      </button>
+      <button class="category-btn" onclick="setCategory('diabetes'); closeSidebar();" id="cat-diabetes">
+        <div class="cat-dot" style="background:#b5895a"></div>Diabetes
+      </button>
+      <button class="category-btn" onclick="setCategory('hipertensi'); closeSidebar();" id="cat-hipertensi">
+        <div class="cat-dot" style="background:#c47e82"></div>Hipertensi
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Tools</div>
+      <button class="category-btn" onclick="startAssessment(); closeSidebar();" id="cat-assess">
+        <div class="cat-dot" style="background:#2c3d2e"></div>Mulai Assessment
+      </button>
+      <button class="category-btn" onclick="showMealPlan(); closeSidebar();" id="cat-meal">
+        <div class="cat-dot" style="background:#b5895a"></div>Generate Meal Plan
+      </button>
+      <button class="category-btn" onclick="printSummaryReport(); closeSidebar();" id="cat-print">
+        <div class="cat-dot" style="background:#a8863f"></div>Unduh Ringkasan Program
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      <p>Setiap program mencakup evaluasi &amp; follow-up terjadwal minimal 1x per bulan.</p>
+    </div>
+  </div>
+
+  <div class="chat-area">
+    <div class="context-bar">
+      <span>Mode:</span>
+      <div class="ctx-chip active" id="chip-asesmen" onclick="switchMode('asesmen', this)">Asesmen</div>
+      <div class="ctx-chip" id="chip-mealplan" onclick="switchMode('mealplan', this)">Meal Plan</div>
+      <div class="ctx-chip" id="chip-edukasi" onclick="switchMode('edukasi', this)">Edukasi Nutrisi</div>
+      <div class="ctx-chip" id="chip-followup" onclick="switchMode('followup', this)">Follow-up</div>
+    </div>
+
+    <div id="storageStatusBanner" style="display:none; background:#f6e7e3; border-bottom:1px solid rgba(181,84,63,0.35); color:#7a3a2a; font-size:12.5px; padding:8px 18px; line-height:1.5;"></div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="section-divider">Sesi Konsultasi Dimulai</div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea id="userInput" placeholder="Ketik pesan atau pilih kategori di sidebar..." rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      </div>
+      <button class="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Nutritionist Dashboard (hidden until passcode verified) ===== -->
+<div class="dashboard-view" id="dashboardView">
+  <div class="dash-topbar">
+    <div class="dash-title">📊 Nutritionist Dashboard — WellClub</div>
+    <div class="dash-actions">
+      <button onclick="loadDashboard()">🔄 Refresh</button>
+      <button onclick="exitDashboard()">← Kembali ke Mode Klien</button>
+    </div>
+  </div>
+  <div class="dash-stats" id="dashStats"></div>
+  <div class="dash-table-wrap">
+    <table class="client-table">
+      <thead>
+        <tr><th>Klien</th><th>Program</th><th>Risiko</th><th>Check-in Terakhir</th><th>Follow-up Berikutnya</th><th>Aksi</th></tr>
+      </thead>
+      <tbody id="clientTableBody">
+        <tr><td colspan="6" style="text-align:center;padding:20px;color:#9a9590;">Memuat data klien...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="client-detail-panel" id="clientDetailPanel"></div>
+</div>
+
+<!-- ===== Passcode gate ===== -->
+<div class="passcode-overlay" id="dashboardOverlay">
+  <div class="passcode-box">
+    <h3>🔒 Akses Nutritionist</h3>
+    <p>Masukkan kode akses untuk melihat dashboard pemantauan klien. Data seluruh klien akan tampil setelah verifikasi.</p>
+    <input type="password" id="passcodeInput" placeholder="Kode akses" onkeydown="if(event.key==='Enter') checkPasscode();">
+    <div class="passcode-error" id="passcodeError"></div>
+    <div class="passcode-actions">
+      <button class="pc-cancel" onclick="closeNutritionistGate()">Batal</button>
+      <button class="pc-submit" onclick="checkPasscode()">Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- Printable summary, populated dynamically when client finishes assessment -->
+<div id="printSummary"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// DETEKSI & PENANGANAN ERROR GLOBAL
+// Menangkap error JS yang luput dari try/catch (termasuk Promise yang
+// reject tanpa .catch), supaya chat TIDAK diam-diam macet tanpa
+// penjelasan apa pun ke user. Detail teknis tetap dicatat ke console
+// untuk keperluan debugging, sementara user melihat pesan singkat.
+// ══════════════════════════════════════════════════════════════════
+let __lastErrorNotifiedAt = 0;
+function notifyUserOfError(context) {
+  const now = Date.now();
+  if (now - __lastErrorNotifiedAt < 4000) return; // cegah spam kalau error beruntun
+  __lastErrorNotifiedAt = now;
+  try {
+    if (typeof addMessage === 'function' && document.getElementById('chatMessages')) {
+      addMessage('⚠️ Terjadi kendala teknis pada sistem (' + context + '). Silakan coba lagi, atau muat ulang (refresh) halaman jika masalah berlanjut. Jawaban Anda sejauh ini tetap tersimpan di chat ini.', false);
+    }
+  } catch (e) { /* penanganan error sendiri gagal — jangan sampai loop, cukup log */ console.error('Gagal menampilkan notifikasi error:', e); }
+}
+
+window.addEventListener('error', function (e) {
+  console.error('[WellClub] Uncaught error:', e.error || e.message, e);
+  notifyUserOfError('script error');
+});
+
+window.addEventListener('unhandledrejection', function (e) {
+  console.error('[WellClub] Unhandled promise rejection:', e.reason);
+  notifyUserOfError('koneksi/proses async');
+});
+
+let currentCategory = 'wellness';
+let mealPlanVariantIndex = {}; // { [category]: 0|1... } — melacak varian meal plan mana yang terakhir ditampilkan per kategori, supaya bergantian tiap kali digenerate ulang
+let currentMode = 'asesmen';
+let assessmentData = {};
+let assessmentStep = 0;
+let inAssessment = false;
+let clientName = '';
+let currentClientId = '';
+let lastReportHTML = '';
+
+// Follow-up (monthly monitoring) state — separate from the initial assessment
+let inFollowup = false;
+let followupStep = 0;
+let followupData = {};
+let followUpHistory = []; // each entry: { date, weight, sleep_quality, stress, vitals, adherence, obstacles }
+
+const categoryNames = {
+  wellness: 'Wellness Lifestyle',
+  sleep: 'Mental Wellness – Better Sleep',
+  recharge: 'Mental Wellness – Recharge & Rebalance',
+  stroke: 'Longevity – Stroke Prevention',
+  diabetes: 'Longevity – Diabetes',
+  hipertensi: 'Longevity – Hipertensi'
+};
+
+const assessmentQuestions = [
+  { key: 'consent', q: '🌿 Selamat datang di **WellClub Nutrition Program** oleh Rumah Atsiri Indonesia.\n\nSaya akan memandu Anda melalui **Nutrition Assessment** untuk menyusun rekomendasi nutrisi, gaya hidup, dan Personal Meal Plan yang dipantau oleh tim wellness kami.\n\nSebelum memulai, mohon persetujuan Anda: data yang Anda berikan (termasuk data kesehatan) akan disimpan dan digunakan **khusus** untuk menyusun program Anda dan dipantau tim wellness/nutritionist. Program ini bersifat **preventif non-medis** — bukan pengganti diagnosis, pemeriksaan lab, atau terapi dari dokter. Apakah Anda menyetujui hal ini?', quick: ['Saya Menyetujui'] },
+  { key: 'name', q: 'Terima kasih atas persetujuannya. Mohon sebutkan **nama lengkap** Anda untuk memulai sesi konsultasi:', quick: [] },
+  { key: 'contact', q: 'Terima kasih, {name}. Mohon sebutkan **nomor WhatsApp atau email** Anda, agar nutritionist kami dapat menghubungi Anda dan memantau progres program dengan tepat.', quick: [] },
+  { key: 'age', q: 'Berapa **usia** Anda saat ini?', quick: ['20–30 tahun','31–40 tahun','41–50 tahun','51–60 tahun','> 60 tahun'] },
+  { key: 'gender', q: 'Apa **jenis kelamin** Anda?', quick: ['Perempuan','Laki-laki'] },
+  { key: 'weight_height', q: 'Berapa **berat badan** (kg) dan **tinggi badan** (cm) Anda saat ini?\n\n_(Contoh: 62 kg / 165 cm)_', quick: [] },
+  { key: 'activity', q: 'Bagaimana **tingkat aktivitas fisik** Anda sehari-hari secara umum?', quick: ['Sangat Sedentary (jarang bergerak)','Ringan (jalan kaki saja)','Moderat (olahraga 2–3x/minggu)','Aktif (olahraga 4–5x/minggu)','Sangat Aktif (olahraga setiap hari)'] },
+  { key: 'exercise_detail', q: 'Jenis olahraga/aktivitas fisik apa yang biasa Anda lakukan, dan berapa lama rata-rata durasinya?\n\n_(Contoh: "Jalan kaki 30 menit, 3x/minggu" atau "Belum rutin olahraga")_', quick: ['Belum rutin olahraga'] },
+  { key: 'hydration', q: 'Berapa rata-rata **asupan cairan/air putih** Anda per hari?', quick: ['< 1 liter (± 4 gelas)','1–1,5 liter','1,5–2 liter','2–2,5 liter','> 2,5 liter'] },
+  { key: 'sleep_quality', q: 'Bagaimana **kualitas tidur** Anda selama ini?', quick: ['Sangat buruk (< 5 jam, sering terbangun)','Kurang (5–6 jam)','Cukup (6–7 jam, sering lelah)','Baik (7–8 jam)','Sangat baik (> 8 jam, segar)'] },
+  { key: 'stress', q: 'Bagaimana **tingkat stres** Anda dalam 1 bulan terakhir?', quick: ['Rendah – merasa tenang','Sedang – kadang cemas','Tinggi – sering overthinking','Sangat tinggi – burnout/lelah ekstrem'] },
+  { key: 'diet_pattern', q: 'Bagaimana **pola makan** Anda sehari-hari?', quick: ['Tidak teratur, sering skip makan','Makan 2–3x tapi sembarangan','Cukup teratur, tapi kurang sayuran','Cukup seimbang','Sangat terjaga dan terencana'] },
+  { key: 'food_pref', q: 'Apakah ada **preferensi atau pantangan makanan** yang perlu saya ketahui?', quick: ['Tidak ada pantangan','Vegetarian / Vegan','Tidak suka seafood','Intoleransi laktosa','Rendah gula / Diabetes','Alergi kacang','Gluten free'] },
+  { key: 'medications', q: 'Apakah Anda sedang mengonsumsi **obat-obatan resep atau suplemen rutin**? Ini penting agar rekomendasi nutrisi/suplemen kami tidak berinteraksi dengan obat Anda.', quick: ['Tidak ada','Obat tekanan darah','Obat diabetes / insulin','Obat pengencer darah (antikoagulan)','Suplemen rutin','Lainnya (akan saya jelaskan)'] },
+  { key: 'vitals', q: 'Untuk kebutuhan program **Longevity** (Stroke, Diabetes, Hipertensi), boleh diinformasikan **tekanan darah** dan **gula darah** terakhir Anda jika diketahui?\n\n_(Contoh: 130/85 mmHg, GDS 110 mg/dL — atau tulis "Belum pernah cek")_', quick: ['Belum pernah cek'] },
+  { key: 'risk_factors', q: 'Apakah Anda memiliki salah satu **faktor risiko** berikut?', quick: ['Tidak ada','Merokok / mantan perokok','Riwayat keluarga stroke/jantung','Kolesterol tinggi','Obesitas (IMT > 27)','Kurang aktivitas fisik'] },
+  { key: 'medical_history', q: 'Apakah Anda memiliki **riwayat kondisi kesehatan** tertentu yang terdiagnosis?', quick: ['Tidak ada','Hipertensi','Diabetes tipe 2','Pernah stroke ringan / TIA','Kolesterol tinggi','Gangguan pencernaan','Penyakit autoimun'] },
+  { key: 'menstrual_cycle', q: 'Bagaimana **siklus haid** Anda belakangan ini? Ini membantu kami menyesuaikan kebutuhan nutrisi (mis. zat besi) dan memastikan program aman untuk kondisi Anda.', quick: ['Teratur','Tidak teratur','Sedang hamil','Sedang menyusui','Sudah menopause','Tidak ingin menjawab'], condition: d => d.gender === 'Perempuan' },
+  { key: 'emergency_symptoms', q: '⚠️ Satu pertanyaan penting untuk keamanan Anda: apakah Anda mengalami salah satu gejala berikut **dalam beberapa hari terakhir**?', quick: ['Tidak ada gejala di atas','Nyeri dada','Sesak napas berat','Pingsan / mau pingsan','Kelemahan mendadak satu sisi tubuh','Bicara pelo / sulit bicara tiba-tiba'] },
+  { key: 'eating_pattern_history', q: 'Beberapa pertanyaan terakhir seputar kebiasaan makan: apakah Anda pernah mengalami pola makan yang sangat ketat/membatasi, rasa cemas berlebihan soal makanan, atau siklus makan-berlebihan-lalu-membatasi secara signifikan?', quick: ['Tidak pernah','Pernah, dan sudah pulih','Ya, saat ini masih saya alami','Tidak ingin menjawab'] },
+  { key: 'wellness_goal', q: 'Terakhir, apa **tujuan utama wellness** yang ingin Anda capai melalui program ini?', quick: ['Tidur lebih berkualitas','Mengelola stres & mood','Meningkatkan energi harian','Menjaga berat badan ideal','Mencegah stroke & penyakit kronis','Mengontrol gula darah','Mengontrol tekanan darah'] }
+];
+
+// Follow-up bulanan: fokus pada PERUBAHAN sejak sesi terakhir, bukan mengulang assessment awal
+const followupQuestions = [
+  { key: 'weight_now', q: '📆 Selamat datang kembali di sesi **Follow-up Bulanan**, {name}. Mari kita lihat progres Anda sejak sesi terakhir.\n\nBerapa **berat badan** Anda saat ini (kg)?\n\n_(Contoh: 61)_', quick: [] },
+  { key: 'sleep_quality_now', q: 'Bagaimana **kualitas tidur** Anda sejak sesi terakhir?', quick: ['Sangat buruk (< 5 jam, sering terbangun)','Kurang (5–6 jam)','Cukup (6–7 jam, sering lelah)','Baik (7–8 jam)','Sangat baik (> 8 jam, segar)'] },
+  { key: 'stress_now', q: 'Bagaimana **tingkat stres** Anda sejak sesi terakhir?', quick: ['Rendah – merasa tenang','Sedang – kadang cemas','Tinggi – sering overthinking','Sangat tinggi – burnout/lelah ekstrem'] },
+  { key: 'vitals_now', q: 'Jika sempat diukur, bagaimana **tekanan darah / gula darah** terbaru Anda?\n\n_(Contoh: 125/80 mmHg, GDS 100 mg/dL — atau tulis "Belum cek ulang")_', quick: ['Belum cek ulang'] },
+  { key: 'adherence', q: 'Seberapa **konsisten** Anda menjalankan meal plan & rekomendasi gaya hidup sejak sesi terakhir?', quick: ['Sangat konsisten (>80%)','Cukup konsisten (50–80%)','Kurang konsisten (<50%)','Belum sempat mulai'] },
+  { key: 'obstacles', q: 'Apakah ada **kendala** yang Anda hadapi selama menjalankan program bulan ini?', quick: ['Tidak ada kendala','Sulit mengatur waktu masak','Godaan makanan di luar rencana','Kurang motivasi','Kendala biaya/bahan','Ada keluhan kesehatan baru'] }
+];
+
+// ── ALLERGY / FOOD-RESTRICTION SAFETY LAYER ────────────────────────
+// Mendeteksi alergi/pantangan makanan dari jawaban assessment (food_pref,
+// juga dipindai dari riwayat medis) lalu memfilter/menyesuaikan otomatis
+// seluruh Meal Plan, Suplemen, dan Alternatif Bahan agar TIDAK memuat
+// bahan yang berisiko bagi klien.
+const ALLERGY_RULES = [
+  {
+    id: 'kacang',
+    label: 'Alergi Kacang / Tree Nut',
+    detect: ['alergi kacang', 'kacang tanah', 'tree nut', 'peanut', 'nut allergy', 'alergi almond', 'alergi mete', 'alergi kenari'],
+    replace: [
+      ['susu almond', 'susu oat'],
+      ['almond butter', 'selai biji bunga matahari'],
+      ['kacang almond', 'biji bunga matahari'],
+      ['kacang mede', 'biji labu panggang'],
+      ['kacang tanah', 'biji bunga matahari'],
+      ['kacang brazil', 'biji labu'],
+      ['walnut', 'biji labu'],
+      ['pistachio', 'biji bunga matahari'],
+      ['almond', 'biji bunga matahari'],
+      ['kacang', 'biji-bijian (bebas kacang)']
+    ]
+  },
+  {
+    id: 'seafood',
+    label: 'Alergi / Pantangan Seafood',
+    detect: ['seafood', 'tidak suka seafood', 'alergi ikan', 'alergi udang', 'alergi kerang', 'alergi seafood', 'udang', 'kepiting', 'cumi', 'kerang'],
+    replace: [
+      ['ikan kembung panggang', 'ayam panggang bumbu rempah'],
+      ['ikan salmon / makerel', 'ayam / tahu panggang'],
+      ['ikan panggang', 'ayam panggang tanpa kulit'],
+      ['ikan kukus', 'tahu kukus'],
+      ['salmon', 'ayam / tempe panggang'],
+      ['makerel', 'ayam panggang'],
+      ['kembung', 'ayam panggang'],
+      ['tuna', 'ayam suwir'],
+      ['sarden', 'ayam panggang'],
+      ['ikan', 'ayam/tahu-tempe (pengganti protein hewani laut)']
+    ]
+  },
+  {
+    id: 'laktosa',
+    label: 'Intoleransi Laktosa / Alergi Susu',
+    detect: ['laktosa', 'intoleransi laktosa', 'alergi susu', 'dairy allergy', 'lactose'],
+    replace: [
+      ['susu almond', 'susu oat'],
+      ['greek yogurt', 'yogurt kelapa (bebas laktosa)'],
+      ['yogurt plain', 'yogurt oat/kelapa (bebas laktosa)'],
+      ['yogurt', 'yogurt oat/kelapa (bebas laktosa)'],
+      ['susu', 'susu oat/kedelai (bebas laktosa)'],
+      ['keju', 'keju bebas laktosa'],
+      ['kefir', 'air kelapa fermentasi']
+    ]
+  },
+  {
+    id: 'gluten',
+    label: 'Gluten Free / Alergi Gluten',
+    detect: ['gluten free', 'bebas gluten', 'alergi gluten', 'celiac'],
+    replace: [
+      ['oat gandum', 'quinoa (bebas gluten)'],
+      ['oatmeal', 'bubur quinoa (bebas gluten)'],
+      ['roti gandum', 'roti bebas gluten'],
+      ['roti', 'roti bebas gluten / ubi kukus']
+    ]
+  },
+  {
+    id: 'telur',
+    label: 'Alergi Telur',
+    detect: ['alergi telur', 'egg allergy'],
+    replace: [
+      ['telur rebus', 'tahu kukus'],
+      ['telur', 'tahu/tempe (pengganti telur)']
+    ]
+  },
+  {
+    id: 'kedelai',
+    label: 'Alergi Kedelai',
+    detect: ['alergi kedelai', 'soy allergy'],
+    replace: [
+      ['susu kedelai', 'susu oat'],
+      ['edamame', 'kacang polong'],
+      ['tempe', 'ayam/ikan (bebas kedelai, sesuai preferensi)'],
+      ['tahu', 'ayam suwir/telur (bebas kedelai)'],
+      ['miso', 'kaldu sayur bening'],
+      ['kecap', 'garam himalaya rendah sodium + rempah'],
+      ['kedelai', 'sumber protein alternatif (bebas kedelai)']
+    ]
+  }
+];
+
+// Mengambil daftar alergi/pantangan yang terdeteksi dari data assessment klien.
+function getAllergyProfile() {
+  const raw = ((assessmentData.food_pref || '') + ' ' + (assessmentData.medical_history || '')).toLowerCase();
+  if (!raw.trim()) return [];
+  return ALLERGY_RULES.filter(rule => rule.detect.some(k => raw.includes(k)));
+}
+
+// Mengganti kata/frasa yang mengandung alergen dengan alternatif aman.
+// Mengembalikan teks hasil & flag apakah ada perubahan (untuk penanda "Disesuaikan").
+function applyAllergySafeText(text, allergyProfile) {
+  let result = text;
+  let changed = false;
+  (allergyProfile || []).forEach(rule => {
+    rule.replace.forEach(([pat, rep]) => {
+      const re = new RegExp(pat.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      if (re.test(result)) {
+        result = result.replace(re, rep);
+        changed = true;
+      }
+    });
+  });
+  return { text: result, changed };
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// AUTO-SCROLL
+// chatStickToBottom adalah status yang terus diperbarui oleh event
+// 'scroll' pada area chat (bukan dihitung ulang sesaat sebelum tiap
+// pesan ditambahkan). Ini memperbaiki bug lama: kalau dihitung ulang
+// tepat sebelum pesan baru ditambahkan, hasilnya bisa "belum sampai
+// bawah" hanya karena animasi scroll sebelumnya belum sempat selesai
+// dieksekusi browser — akibatnya pesan berikutnya (termasuk pertanyaan
+// baru dari bot) gagal auto-scroll dan klien harus scroll manual.
+// Scroll dibuat INSTAN (bukan smooth) supaya benar-benar langsung
+// bergeser begitu ada pesan baru, tanpa jeda animasi yang bisa telat
+// dikejar oleh pesan berikutnya.
+// ══════════════════════════════════════════════════════════════════
+let chatStickToBottom = true;
+
+function isChatNearBottom(threshold) {
+  const box = document.getElementById('chatMessages');
+  if (!box) return true;
+  return box.scrollHeight - box.scrollTop - box.clientHeight < (threshold || 120);
+}
+
+function scrollChatToBottom() {
+  const box = document.getElementById('chatMessages');
+  if (!box) return;
+  box.scrollTop = box.scrollHeight; // instan — langsung, tanpa animasi
+}
+
+(function initChatScrollTracking() {
+  const box = document.getElementById('chatMessages');
+  if (!box) return;
+  box.addEventListener('scroll', () => { chatStickToBottom = isChatNearBottom(150); }, { passive: true });
+})();
+
+// Kalau viewport berubah ukuran (mis. keyboard HP muncul/hilang) dan user
+// memang sedang berada di dekat bagian bawah chat, ikut sesuaikan supaya
+// pesan terakhir tetap terlihat.
+window.addEventListener('resize', () => {
+  if (chatStickToBottom) scrollChatToBottom();
+});
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function addMessage(text, isUser, extras) {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + (isUser ? 'user' : 'bot');
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = isUser ? 'N' : 'RA';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+
+  if (extras && extras.quickReplies && extras.quickReplies.length > 0) {
+    const qr = document.createElement('div');
+    qr.className = 'quick-replies';
+    extras.quickReplies.forEach(r => {
+      const b = document.createElement('button');
+      b.className = 'qr-btn';
+      b.textContent = r;
+      b.onclick = () => { sendQuickReply(r); };
+      qr.appendChild(b);
+    });
+    bubble.appendChild(qr);
+  }
+
+  if (extras && extras.card) {
+    bubble.innerHTML += extras.card;
+  }
+
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  box.appendChild(div);
+
+  // Pesan dari user sendiri (termasuk tap quick-reply) SELALU auto-scroll —
+  // itu jelas menandakan klien ingin melihat respons berikutnya. Pesan dari
+  // bot mengikuti status "menempel ke bawah" supaya tidak mengganggu klien
+  // yang sedang scroll membaca riwayat lama.
+  if (isUser) { chatStickToBottom = true; scrollChatToBottom(); }
+  else if (chatStickToBottom) scrollChatToBottom();
+}
+
+function showTyping() {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typingIndicator';
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar'; avatar.textContent = 'RA';
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  div.appendChild(avatar); div.appendChild(bubble);
+  box.appendChild(div);
+  if (chatStickToBottom) scrollChatToBottom();
+  return div;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function sendQuickReply(text) {
+  addMessage(text, true);
+  if (inFollowup) handleFollowupReply(text);
+  else if (inAssessment) handleAssessmentReply(text);
+  else handleFreeChat(text);
+}
+
+function sendMessage() {
+  const inp = document.getElementById('userInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = ''; inp.style.height = 'auto';
+  addMessage(text, true);
+  if (inFollowup) {
+    handleFollowupReply(text);
+  } else if (inAssessment) {
+    handleAssessmentReply(text);
+  } else {
+    handleFreeChat(text);
+  }
+}
+
+function handleFreeChat(text) {
+  const t = showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const lower = text.toLowerCase();
+    if (lower === 'wellness lifestyle') {
+      setCategory('wellness');
+    } else if (lower === 'mental wellness') {
+      addMessage(`🌙 **Mental Wellness** mencakup dua fokus program. Mana yang ingin Anda pilih?`, false, {
+        quickReplies: ['Better Sleep', 'Recharge & Rebalance']
+      });
+    } else if (lower === 'better sleep') {
+      setCategory('sleep');
+    } else if (lower === 'recharge & rebalance') {
+      setCategory('recharge');
+    } else if (lower === 'longevity program') {
+      addMessage(`⏳ **Longevity Program** kami mencakup 3 fokus pencegahan. Mana yang paling relevan dengan kondisi Anda?`, false, {
+        quickReplies: ['Stroke Prevention', 'Diabetes', 'Hipertensi']
+      });
+    } else if (lower === 'stroke prevention') {
+      setCategory('stroke');
+    } else if (lower === 'diabetes' && !inAssessment) {
+      setCategory('diabetes');
+    } else if (lower === 'hipertensi' && !inAssessment) {
+      setCategory('hipertensi');
+    } else if (lower.includes('check-in') || lower.includes('checkin') || lower.includes('isi check')) {
+      startFollowup();
+    } else if (lower.includes('jadwal follow')) {
+      addMessage(`📆 Berikut jadwal follow-up bulanan Anda:`, false, { card: getFollowupCard() });
+    } else if (lower.includes('follow-up') || lower.includes('followup') || lower.includes('follow up')) {
+      openFollowupMenu();
+    } else if (lower.includes('edukasi')) {
+      openEdukasiMenu();
+    } else if (lower.includes('referensi') || lower.includes('sumber ilmiah') || lower.includes('jurnal') || lower.includes('penelitian')) {
+      addMessage(`Tentu, berikut dasar ilmiah yang digunakan untuk menyusun rekomendasi program **${categoryNames[currentCategory] || 'Wellness'}**:`, false, { card: getReferenceCard(currentCategory) });
+    } else if (lower.includes('alternatif bahan') || lower.includes('ganti bahan') || lower.includes('substitusi')) {
+      addMessage(`🔄 Berikut beberapa **alternatif bahan** untuk Meal Plan **${categoryNames[currentCategory]}** Anda:`, false, { card: getIngredientSwapCard(currentCategory) });
+      addMessage(`Apakah ada bahan tertentu yang ingin diganti karena alergi atau ketersediaan di daerah Anda?`, false, { quickReplies: ['Hitung kalori detail', 'Tambahkan suplemen', 'Unduh Ringkasan Program'] });
+    } else if (lower.includes('kalori') || lower.includes('makro')) {
+      addMessage(`🔢 Berikut **rincian kebutuhan kalori & makronutrien** berdasarkan hasil assessment Anda:`, false, { card: getCalorieDetailCard() });
+      addMessage(`Angka ini adalah estimasi awal dan akan divalidasi oleh nutritionist pada sesi follow-up.`, false, { quickReplies: ['Ganti alternatif bahan', 'Tambahkan suplemen', 'Unduh Ringkasan Program'] });
+    } else if (lower.includes('suplemen')) {
+      addMessage(`💊 Berikut **suplemen pendukung** yang relevan untuk program **${categoryNames[currentCategory]}**:`, false, { card: getSupplementCard(currentCategory) });
+      addMessage(`Penggunaan suplemen akan disesuaikan dan dikonfirmasi oleh nutritionist sesuai kondisi kesehatan Anda.`, false, { quickReplies: ['Ganti alternatif bahan', 'Hitung kalori detail', 'Unduh Ringkasan Program'] });
+    } else if (lower.includes('meal plan') || lower.includes('makan')) {
+      showMealPlan();
+    } else if (lower.includes('assessment') || lower.includes('asesmen')) {
+      startAssessment();
+    } else if (lower.includes('cetak') || lower.includes('unduh') || lower.includes('print') || lower.includes('pdf')) {
+      printSummaryReport();
+    } else {
+      addMessage(getNutritionResponse(lower), false);
+    }
+  }, 900);
+}
+
+function getIngredientSwapCard(cat) {
+  const swaps = {
+    wellness: [ ['Nasi merah','Singkong atau ubi jalar rebus'], ['Ikan panggang','Ayam tanpa kulit atau tahu/tempe'], ['Susu kedelai','Susu sapi rendah lemak (jika tidak vegan)'], ['Kacang tanah','Kacang mete atau kemiri secukupnya'] ],
+    sleep: [ ['Pisang','Kurma 2–3 butir (efek serupa untuk triptofan)'], ['Kacang tanah','Kacang mete atau kacang almond'], ['Ikan kembung','Ikan tongkol atau lele'], ['Madu','Gula aren sedikit (porsi kecil)'] ],
+    recharge: [ ['Coklat bubuk tanpa gula','Kakao bubuk asli atau susu kedelai polos'], ['Yogurt plain','Susu fermentasi lokal atau tempe sebagai sumber probiotik nabati'], ['Kacang panjang','Buncis atau kapri'], ['Teh hijau','Teh melati atau wedang sereh'] ],
+    stroke: [ ['Ikan kembung','Ikan tongkol atau tenggiri segar'], ['Bayam','Kangkung atau sawi hijau'], ['Ubi','Labu kuning kukus'], ['Air rebusan daun salam','Wedang jahe tanpa gula'] ],
+    diabetes: [ ['Nasi merah','Nasi jagung atau porsi nasi putih dikurangi + perbanyak sayur'], ['Oat / havermut','Bubur kacang hijau tanpa gula'], ['Pare','Timun (jika tidak suka pahit)'], ['Kayu manis','Jahe bubuk'] ],
+    hipertensi: [ ['Garam dapur','Rempah: kunyit, jahe, bawang putih, lada hitam'], ['Ikan panggang bumbu garam','Ikan panggang bumbu lemon & rempah'], ['Keju olahan','Tahu sebagai sumber protein rendah sodium'], ['Teh rosella','Air rebusan daun salam'] ]
+  };
+  const list = swaps[cat] || swaps.wellness;
+  const allergyProfile = getAllergyProfile();
+  let allergyRows = '';
+  if (allergyProfile.length) {
+    allergyRows = allergyProfile.map(rule => `
+    <div class="lifestyle-item">
+      <div class="lifestyle-icon">⚠️</div>
+      <div><strong>${rule.label}</strong><span>Seluruh bahan terkait sudah otomatis diganti pada Meal Plan Anda dengan alternatif yang aman (lihat tanda 🔁 pada menu).</span></div>
+    </div>`).join('');
+  }
+  const rows = list.map(s => `
+    <div class="lifestyle-item">
+      <div class="lifestyle-icon">🔄</div>
+      <div><strong>${s[0]}</strong><span>Alternatif: ${s[1]}</span></div>
+    </div>`).join('');
+  return `<div class="lifestyle-card"><h4>🔄 Alternatif Bahan Makanan</h4>${allergyRows}${rows}<div class="disclaimer-note">Pilih alternatif sesuai preferensi, alergi, atau ketersediaan bahan di daerah Anda. Konsultasikan ke nutritionist bila mengganti lebih dari 2 bahan sekaligus.</div></div>`;
+}
+
+function getCalorieDetailCard() {
+  const p = computeProfile();
+  const proteinG = Math.round((p.tdee * 0.25) / 4);
+  const carbG = Math.round((p.tdee * 0.45) / 4);
+  const fatG = Math.round((p.tdee * 0.30) / 9);
+  return `<div class="assessment-card">
+    <h4>🔢 Rincian Kalori & Makronutrien Harian</h4>
+    <div class="card-sub">Estimasi berdasarkan BB/TB, usia, dan tingkat aktivitas yang Anda laporkan</div>
+    <div class="assess-row"><span class="assess-label">Total Kebutuhan Kalori (TDEE)</span><span class="assess-val">${p.tdee} kkal/hari</span></div>
+    <div class="assess-row"><span class="assess-label">Protein (~25%)</span><span class="assess-val">${proteinG} g/hari</span></div>
+    <div class="assess-row"><span class="assess-label">Karbohidrat (~45%)</span><span class="assess-val">${carbG} g/hari</span></div>
+    <div class="assess-row"><span class="assess-label">Lemak (~30%)</span><span class="assess-val">${fatG} g/hari</span></div>
+    <div class="assess-row"><span class="assess-label">BMI</span><span class="assess-val">${p.bmi} – ${p.bmiStatus}</span></div>
+    <div class="disclaimer-note">Komposisi makro standar 25/45/30; untuk klien Diabetes/Hipertensi/Stroke, rasio akan disesuaikan nutritionist (misalnya karbohidrat kompleks diprioritaskan, sodium dibatasi).</div>
+  </div>`;
+}
+
+function getSupplementCard(cat) {
+  const supp = {
+    wellness: [ ['Multivitamin & Mineral harian','Menutup potensi kekurangan mikronutrien lintas 6 sistem tubuh'], ['Probiotik','Mendukung keragaman gut microbiome — pusat kontrol kesehatan'], ['Omega-3 (EPA/DHA)','Anti-inflamasi umum, mendukung sistem saraf & jantung'], ['Magnesium','Kofaktor produksi energi (ATP) & regulasi sistem saraf-hormonal'], ['Vitamin C, D & Zinc','Mendukung sistem imun serta kontrol stres oksidatif'] ],
+    sleep: [ ['Magnesium Glisinat','Aktivasi reseptor GABA-A — menenangkan sistem saraf & relaksasi otot sebelum tidur'], ['L-Theanine','Meningkatkan gelombang alpha otak — relaksasi tanpa efek kantuk berlebih'], ['Melatonin (sesuai anjuran)','Sinyal hormon gelap untuk regulasi ritme tidur jangka pendek'], ['Vitamin B6 (Piridoksin)','Kofaktor konversi triptofan → serotonin → melatonin'] ],
+    recharge: [ ['Ashwagandha (ekstrak KSM-66)','Adaptogen — dapat menurunkan kortisol serum hingga 27–30%'], ['Rhodiola Rosea (ekstrak standar 3% rosavin)','Adaptogen — meningkatkan ketahanan terhadap stres fisik & mental'], ['L-Theanine','Relaksasi aktif tanpa sedasi, menyeimbangkan gelombang alpha otak'], ['Phosphatidylserine','Menekan lonjakan kortisol berlebih saat stres akut'], ['Omega-3 (EPA > DHA)','Menurunkan reaktivitas HPA Axis & anti-neuroinflamasi'] ],
+    stroke: [ ['Omega-3 (EPA/DHA)','Mendukung kesehatan pembuluh darah'], ['CoQ10','Mendukung fungsi kardiovaskular'], ['Vitamin B kompleks','Membantu regulasi homosistein'] ],
+    diabetes: [ ['Berberine (sesuai anjuran medis)','Mendukung sensitivitas insulin'], ['Chromium picolinate','Mendukung metabolisme gula darah'], ['Serat psyllium husk','Memperlambat penyerapan gula'] ],
+    hipertensi: [ ['Magnesium','Mendukung relaksasi pembuluh darah'], ['CoQ10','Mendukung kesehatan jantung'], ['Kalium (dari makanan, bukan suplemen bebas)','Membantu keseimbangan sodium-kalium'] ]
+  };
+  const list = supp[cat] || supp.wellness;
+  const allergyProfile = getAllergyProfile();
+  // Peringatan sumber bahan suplemen yang umum berkaitan dengan alergi tertentu
+  const supplementAllergyAdvisory = {
+    seafood: { keys: ['omega-3', 'epa', 'dha'], note: 'Umumnya bersumber dari minyak ikan — pilih varian Omega-3 berbasis alga (algae oil) sebagai alternatif bebas seafood.' },
+    laktosa: { keys: ['probiotik'], note: 'Pastikan memilih strain probiotik non-dairy/vegan agar bebas laktosa.' },
+    kedelai: { keys: ['phosphatidylserine', 'fosfatidilserin'], note: 'Umumnya bersumber dari kedelai — pilih varian berbasis bunga matahari (sunflower-derived) bila alergi kedelai.' },
+    kacang: { keys: [], note: '' }
+  };
+  const rows = list.map(s => {
+    let warn = '';
+    allergyProfile.forEach(rule => {
+      const adv = supplementAllergyAdvisory[rule.id];
+      if (adv && adv.note && adv.keys.some(k => (s[0] + ' ' + s[1]).toLowerCase().includes(k))) {
+        warn += `<br><span style="color:#b5543f;font-size:11.5px">⚠️ ${adv.note}</span>`;
+      }
+    });
+    return `
+    <div class="lifestyle-item">
+      <div class="lifestyle-icon">💊</div>
+      <div><strong>${s[0]}</strong><span>${s[1]}${warn}</span></div>
+    </div>`;
+  }).join('');
+  const allergyNote = allergyProfile.length
+    ? `<div class="disclaimer-note" style="background:#f6e7e3;border-color:rgba(181,84,63,0.35);color:#7a3a2a">⚠️ Suplemen di atas telah ditinjau ulang berdasarkan pantangan/alergi Anda (${allergyProfile.map(r => r.label).join(', ')}). Item berisiko diberi catatan alternatif — konfirmasikan pilihan akhir bersama nutritionist.</div>`
+    : '';
+  return `<div class="lifestyle-card"><h4>💊 Rekomendasi Suplemen</h4>${rows}${allergyNote}<div class="disclaimer-note">Suplemen bersifat pelengkap, bukan pengganti makanan utuh. Dosis dan kesesuaian akan dikonfirmasi oleh nutritionist, terutama bila Anda sedang dalam pengobatan medis.</div></div>`;
+}
+
+function getNutritionResponse(text) {
+  if (text.includes('gut-brain') || text.includes('gut brain') || text.includes('usus otak') || text.includes('usus-otak') || text.includes('sumbu usus')) return `🧠 **Gut-Brain Axis: Fondasi Kesehatan Mental**\n\nSekitar 90–95% serotonin dan 50% dopamin tubuh diproduksi di **usus**, bukan di otak. Usus disebut "otak kedua" karena memiliki ±500 juta neuron (sistem saraf enterik) yang berkomunikasi dua arah dengan otak lewat nervus vagus.\n\nEmpat jalur komunikasi utamanya:\n• **Nervus vagus** – komunikasi saraf langsung usus↔otak\n• **Neurotransmiter** – serotonin, dopamin, GABA diproduksi di usus\n• **Sitokin imun** – peradangan usus dapat memicu peradangan otak (terkait depresi)\n• **Metabolit mikrobiome (SCFA)** – menjaga integritas blood-brain barrier & produksi BDNF\n\n🥗 Nutrisi kunci: probiotik (yogurt, kimchi, tempeh, kefir), prebiotik/makanan bakteri baik (pisang, bawang, oat), polifenol (buah beri, teh hijau), serat larut (kacang-kacangan, sayuran).\n\n_Fondasi ilmiah ini mendasari seluruh rekomendasi pada program Better Sleep dan Recharge & Rebalance kami._`;
+  if (text.includes('tidur') || text.includes('sleep')) return `🌙 **Nutrisi untuk Tidur Berkualitas (Better Sleep)**\n\nTidur diatur oleh 2 jalur utama: rantai **Triptofan → Serotonin → Melatonin**, dan aktivasi reseptor **GABA-A** yang menenangkan sistem saraf. Ritme sirkadian juga dipengaruhi pola & waktu makan.\n\nNutrisi kunci pendukungnya:\n🦃 **Triptofan** – telur, susu, pisang, oat, kacang mede, keju (prekursor serotonin & melatonin)\n🌿 **Magnesium Glisinat** – bayam, biji labu, dark chocolate, almond, pisang (aktivasi GABA-A, relaksasi otot)\n🍵 **L-Theanine** – teh hijau/matcha rendah kafein (gelombang alpha otak, relaksasi tanpa kantuk berlebih)\n🍌 **Vitamin B6** – ayam, pisang, biji bunga matahari, alpukat (kofaktor konversi triptofan→serotonin→melatonin)\n🍒 **Melatonin alami** – ceri, tomat, walnut, biji-bijian\n🧀 **Kalsium** – susu, keju, yogurt, tempe (membantu otak memakai triptofan untuk sintesis melatonin)\n🥘 **GABA dari fermentasi** – tempe, kimchi, kefir, natto, miso\n🦪 **Zinc** – tiram, daging sapi, biji labu (modulasi reseptor melatonin)\n\n☀️ Dapatkan cahaya matahari pagi, hindari makan malam terlalu larut, dan hindari kafein setelah pukul 14.00.`;
+  if (text.includes('stres') || text.includes('mood') || text.includes('cemas') || text.includes('recharge') || text.includes('lelah') || text.includes('rebalance')) return `⚡ **Nutrisi untuk Recharge & Rebalance (Manajemen Stres)**\n\nStres kronis mengaktifkan **HPA Axis** berlebihan → kortisol tinggi → inflamasi sistemik → deplesi magnesium, vitamin C, B5 → kelelahan adrenal.\n\nNutrisi yang memodulasi respons stres:\n🌿 **Magnesium** – bayam, biji labu, dark chocolate, almond, oat (menekan hiperreaktivitas HPA Axis)\n🍊 **Vitamin C** – paprika merah, jambu biji, jeruk, kiwi (mendukung fungsi adrenal, antioksidan)\n🍄 **Vitamin B5** – ayam, telur, alpukat, jamur (kofaktor sintesis hormon adrenal)\n🌱 **Ashwagandha (adaptogen)** – dapat menurunkan kortisol serum hingga 27–30%\n🌸 **Rhodiola Rosea (adaptogen)** – meningkatkan ketahanan terhadap stres fisik & mental\n🍵 **L-Theanine** – teh hijau/matcha (relaksasi aktif tanpa sedasi)\n🐟 **Omega-3 EPA>DHA** – salmon, sarden, mackerel (menurunkan reaktivitas HPA Axis)\n🥚 **Phosphatidylserine** – makarel, hati sapi, kedelai putih (menekan lonjakan kortisol saat stres akut)\n\n🚫 Yang memperberat HPA Axis: gula berlebih, kafein berlebih, alkohol, diet rendah nutrisi.`;
+  if (text.includes('diabetes') || text.includes('gula darah')) return `**Nutrition protocol untuk Diabetes Tipe 2 (Longevity Program):**\n\n✅ Karbohidrat kompleks: nasi merah, oats, ubi, quinoa\n✅ Serat tinggi: sayuran non-tepung, kacang polong, psyllium husk\n✅ Protein lean: tempe, tahu, ikan, ayam tanpa kulit\n✅ Minyak sehat: VCO, minyak zaitun\n\n🚫 Batasi: nasi putih, roti putih, minuman manis, gorengan\n\n⏰ Pola makan: 3 makan utama + 2 snack sehat, jarak makan tidak > 4 jam. Progres gula darah dipantau bersama nutritionist setiap bulan.`;
+  if (text.includes('hipertensi') || text.includes('tensi') || text.includes('darah tinggi')) return `**Nutrition protocol untuk Hipertensi (Longevity Program):**\n\n💚 Pendekatan **DASH** – tinggi kalium, magnesium, kalsium\n🧅 Konsumsi bawang putih, bit, dark chocolate (70%+)\n🐟 Omega-3 dari ikan laut 3x seminggu\n🌿 Rempah sebagai pengganti garam: kunyit, jahe, kayu manis\n\n🚫 Batasi: garam < 1.500 mg/hari, alkohol, kafein berlebih, makanan olahan\n\nTekanan darah akan dievaluasi bersama nutritionist pada sesi follow-up bulanan.`;
+  if (text.includes('stroke')) return `**Nutrition protocol untuk Pencegahan Stroke (Longevity Program):**\n\n🧠 Pola makan neuroprotektif: tinggi omega-3, folat, antioksidan\n🥦 Sayuran hijau & buah beri untuk fungsi pembuluh darah\n🧂 Sodium dibatasi ketat (< 1.500 mg/hari)\n🐟 Ikan berlemak 2–3x/minggu untuk kesehatan vaskular\n🚭 Dukungan gaya hidup: berhenti merokok, kontrol tekanan darah & gula darah rutin\n\nUntuk klien dengan riwayat/faktor risiko stroke, program berjalan dengan pengawasan nutritionist lebih ketat dan koordinasi dengan tenaga medis bila diperlukan.`;
+  if (text.includes('wellness lifestyle') || text.includes('sistem tubuh') || text.includes('biological network') || text.includes('jaringan biologis')) return `🌿 **Wellness Lifestyle: Biological Network of Health**\n\nGaya hidup sehat bekerja melalui 6 sistem tubuh yang saling terhubung (Zeng & Qin, 2025) — perubahan kecil pada diet, aktivitas, tidur, dan stres dapat mengubah fungsi ke-6 sistem ini secara signifikan:\n\n1️⃣ **Metabolisme** – energi & keseimbangan insulin → karbohidrat kompleks (low GI), serat, protein cukup\n2️⃣ **Inflamasi** – cegah *inflammaging* (inflamasi kronis ringan) → omega-3, serat, antioksidan\n3️⃣ **Gut Microbiome** – pusat kontrol kesehatan → serat, probiotik, diet berbasis vegetarian\n4️⃣ **Stres Oksidatif** – kontrol kerusakan sel/DNA → vitamin C, selenium, polifenol\n5️⃣ **Sistem Imun** – pertahanan & keseimbangan → vitamin A, C, D, zinc, protein cukup\n6️⃣ **Saraf & Hormonal** – atur stres, tidur, mood → magnesium, omega-3, pola makan teratur\n\n_Nutrisi kunci energi harian: karbohidrat kompleks, protein berkualitas, serat larut, lemak sehat (MUFA), magnesium, vitamin B-kompleks, zat besi, dan CoQ10._`;
+  if (text.includes('longevity') || text.includes('anti-aging') || text.includes('anti aging') || text.includes('penuaan') || text.includes('telomere') || text.includes('epigenetik')) return `⏳ **Longevity & Anti-Aging: Fondasi Ilmiah**\n\nLongevity = **lifespan** (usia hidup) + **healthspan** (masa hidup sehat tanpa penyakit kronis) — WHO. Skema hubungannya:\n\n**Nutrisi → Gut Microbiome → Epigenetik & Metabolisme → Inflamasi & Imun → Fungsi Organ → Aging Rate → Longevity**\n\n🧬 **Proteksi Telomere & DNA** – Omega-3 DHA+EPA (memperlambat pemendekan telomer hingga 32% pada kadar plasma tertinggi — Farzaneh-Far, JAMA 2010), Folat & B12, Vitamin C & E, Selenium, Zinc, Resveratrol (aktivasi SIRT1), EGCG dari teh hijau\n\n🔥 **Anti-Inflammaging** – Omega-3, Kurkumin (inhibisi NF-kB), Quercetin (senolytic), Polifenol Antosianin, Vitamin D3+K2, Magnesium, Serat Prebiotik, Probiotik\n\n🧫 **Epigenetik & Mikrobioma** – Sulforafan (brokoli/kubis), Butyrate dari serat fermentasi, Betain & Kolin (donor metil DNA), NAD+ precursors (NMN/NR), Inulin & FOS, Kolagen terhidrolisis\n\n_Individu dengan longevity tinggi memiliki mikrobiota usus yang lebih beragam & stabil, serta tingkat inflamasi lebih rendah (Tseng, 2025; Adibi, 2026). Prinsip ini mendasari program Stroke, Diabetes, dan Hipertensi kami._`;
+  return `Terima kasih atas pertanyaannya. Untuk mendapatkan rekomendasi nutrisi yang **paling tepat dan personal**, saya sarankan kita mulai dengan **Nutrition Assessment** terlebih dahulu.\n\nKlik **"Mulai Assessment"** di sidebar atau ketik "assessment" untuk memulai. Anda juga bisa bertanya topik lain: tidur, stres/recharge, gut-brain axis, wellness lifestyle, longevity/anti-aging, diabetes, hipertensi, atau stroke.`;
+}
+
+function getReferenceCard(cat) {
+  const refSets = {
+    wellness: {
+      title: '📚 Referensi Ilmiah — Wellness Lifestyle & Biological Network of Health',
+      note: 'Rekomendasi program Wellness Lifestyle (6 sistem tubuh: metabolisme, inflamasi, gut microbiome, stres oksidatif, imun, saraf & hormonal) disusun berdasarkan kajian ilmiah di atas. Daftar referensi lengkap tersedia atas permintaan ke tim nutritionist WellClub.',
+      refs: [
+        ['Zeng, Qin, et al. (2025)', 'The Human Gut Microbiota is Associated with Host Lifestyle: A Comprehensive Narrative Review — PubMed'],
+        ['Khaledi, Mansoor, et al. (2024)', 'The Role of Gut Microbiota in Human Metabolism and Inflammatory Diseases on Elderly Individuals — Springer'],
+        ['Tseng, Ching Hung, et al. (2025)', 'From Dysbiosis to Longevity: A Narrative Review into the Gut Microbiome\u2019s Impact on Aging — Springer'],
+        ['Adibi, Sasan (2026)', 'A Conceptual Digital Health Framework for Longevity Optimization: Inflammation-Centered Approach Integrating Microbiome and Lifestyle Data — PMC']
+      ]
+    },
+    stroke: { longevity: true }, diabetes: { longevity: true }, hipertensi: { longevity: true },
+    longevity: {
+      title: '📚 Referensi Ilmiah — Longevity & Anti-Aging',
+      note: 'Rekomendasi program Longevity (Stroke, Diabetes, Hipertensi) disusun berdasarkan kajian ilmiah tentang epigenetik, mikrobioma, dan inflamasi di atas, ditambah studi klinis Farzaneh-Far et al. (JAMA, 2010) mengenai omega-3 dan pemendekan telomer. Daftar referensi lengkap tersedia atas permintaan ke tim nutritionist WellClub.',
+      refs: [
+        ['Suleiman, Kolawole Yusuf, et al. (2025)', 'The Epigenetic Influence of Diet-Induced Gut Microbiome Changes in Precision Nutrition: A Systematic Review — PubMed'],
+        ['Bacaloni, Sabrin, et al. (2025)', 'Nutrition, Gut Microbiota, and Epigenetics in the Modulation of Immune Response and Metabolic Health — PMC'],
+        ['Escamila, Noelia Garzon, et al. (2026)', 'Mechanistic Links Between the Gut Microbiome and Longevity Therapeutics — PMC'],
+        ['Farzaneh-Far, R., et al. (2010)', 'Association of Marine Omega-3 Fatty Acid Levels with Telomeric Aging in Patients with Coronary Heart Disease — JAMA']
+      ]
+    },
+    mental: {
+      title: '📚 Referensi Ilmiah — Gut-Brain Axis & Mental Wellness',
+      note: 'Rekomendasi nutrisi pada program Mental Wellness (Better Sleep & Recharge and Rebalance) disusun berdasarkan kajian ilmiah di atas. Daftar referensi lengkap tersedia atas permintaan ke tim nutritionist WellClub.',
+      refs: [
+        ['Patil & Mehdi (2025)', 'The Gut-Brain Axis and Mental Health: How Diet Shapes Our Cognitive and Emotional Well-Being — PubMed'],
+        ['Holtz et al. (2025)', 'Role of Diet and Its Effects on the Gut Microbiome in the Pathophysiology of Mental Disorders — Translational Psychiatry (Nature)'],
+        ['Frontiers in Aging Neuroscience (2025)', 'The Microbiota–Gut–Brain Axis in Mental and Neurodegenerative Disorders'],
+        ['Merino Del Portillo et al. (2024)', 'Nutritional Modulation of the Gut-Brain Axis: A Comprehensive Review of Dietary Interventions in Depression and Anxiety — Metabolites'],
+        ['Ramadan et al. (2025)', 'Microbiome Gut-Brain-Axis: Impact on Brain Development and Mental Health — Molecular Neurobiology']
+      ]
+    }
+  };
+  let key = (cat === 'sleep' || cat === 'recharge') ? 'mental'
+          : (cat === 'stroke' || cat === 'diabetes' || cat === 'hipertensi') ? 'longevity'
+          : (cat === 'wellness') ? 'wellness' : 'mental';
+  const set = refSets[key];
+  const rows = set.refs.map(r => `
+    <div class="lifestyle-item">
+      <div class="lifestyle-icon">📄</div>
+      <div><strong>${r[0]}</strong><span>${r[1]}</span></div>
+    </div>`).join('');
+  return `<div class="lifestyle-card"><h4>${set.title}</h4>${rows}<div class="disclaimer-note">${set.note}</div></div>`;
+}
+
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-' + cat).classList.add('active');
+
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop = '6px';
+  div.textContent = '— Kategori: ' + categoryNames[cat] + ' —';
+  box.appendChild(div);
+  // Scroll cepat begitu diklik supaya langsung ada feedback (akan
+  // disempurnakan lagi setelah pesan intro selesai dirender di bawah).
+  scrollElementToTop_(box, div);
+
+  const t = showTyping(); // showTyping ikut scroll ke bawah sementara, tidak apa-apa — akan dikoreksi lagi di bawah
+  setTimeout(() => {
+    removeTyping();
+    const quickReplies = (cat === 'sleep' || cat === 'recharge')
+      ? ['Mulai Assessment', 'Lihat Meal Plan', 'Pelajari Gut-Brain Axis', 'Lihat Referensi Ilmiah']
+      : ['Mulai Assessment', 'Lihat Meal Plan', 'Tanya Nutrisi', 'Lihat Referensi Ilmiah'];
+    addMessage(getCategoryIntro(cat), false, { quickReplies });
+    // Koreksi final SETELAH pesan+quick reply selesai dirender: posisikan
+    // ulang berdasarkan DIVIDER (bukan pesan baru yang panjang), supaya
+    // tidak mentok ke batas maksimal scroll akibat tinggi pesan berubah-ubah.
+    scrollElementToTop_(box, div);
+  }, 600);
+}
+
+// Scroll container `box` supaya bagian ATAS elemen `el` sejajar dengan
+// bagian atas `box`. Dipakai supaya klik menu sidebar langsung terlihat
+// hasilnya, tanpa ikut menggeser elemen di luar `box` (mis. sidebar).
+function scrollElementToTop_(box, el) {
+  const delta = el.getBoundingClientRect().top - box.getBoundingClientRect().top;
+  box.scrollTop = Math.max(0, box.scrollTop + delta - 12);
+}
+
+function getCategoryIntro(cat) {
+  const intros = {
+    wellness: `🌿 **Wellness Lifestyle Program**\n\nTubuh Anda adalah *biological network of health* — metabolisme, inflamasi, gut microbiome, stres oksidatif, sistem imun, serta sistem saraf & hormonal saling terhubung. Perubahan kecil pada gaya hidup (diet, aktivitas, tidur, stres) dapat mengubah fungsi biologis secara signifikan (Zeng & Qin, 2025). Program ini menjaga stabilitas 6 sistem tersebut melalui:\n\n• Karbohidrat kompleks (low GI) & serat untuk energi & metabolisme stabil\n• Nutrisi anti-inflamasi (omega-3, polifenol) untuk mencegah *inflammaging*\n• Serat & probiotik untuk keragaman gut microbiome\n• Antioksidan (vitamin C, selenium, polifenol) untuk kontrol stres oksidatif\n• Magnesium, omega-3, & pola makan teratur untuk sistem saraf-hormonal\n\nSiap memulai journey wellness Anda?`,
+    sleep: `🌙 **Mental Wellness — Better Sleep**\n\nTidur berkualitas diatur oleh dua jalur utama: rantai **Triptofan → Serotonin → Melatonin**, dan aktivasi reseptor **GABA-A** yang menenangkan sistem saraf — keduanya sangat dipengaruhi oleh apa yang Anda konsumsi. Program ini mengoptimalkan:\n\n• Ritme sirkadian melalui nutrisi & timing makan\n• Nutrisi pendukung produksi melatonin alami (triptofan, vitamin B6, kalsium)\n• Magnesium glisinat & L-Theanine untuk relaksasi sistem saraf\n• Aromaterapi lavender & chamomile sebagai pelengkap relaksasi\n\nApa tantangan tidur utama Anda?`,
+    recharge: `⚡ **Mental Wellness — Recharge & Rebalance**\n\nStres kronis mengaktifkan **HPA Axis** berlebihan → kortisol tinggi → inflamasi sistemik → deplesi magnesium, vitamin C, dan B5 → kelelahan adrenal. Program ini fokus memutus siklus tersebut melalui:\n\n• Adaptogen (Ashwagandha, Rhodiola Rosea) untuk resiliensi tubuh terhadap stres\n• Nutrisi pemulihan fungsi adrenal (magnesium, vitamin C, B5)\n• Omega-3 & Phosphatidylserine untuk menekan reaktivitas kortisol\n• Dukungan gut-brain axis (probiotik, prebiotik) untuk mood yang stabil\n\nSeberapa lelah / tertekan Anda merasa belakangan ini?`,
+    stroke: `🧠 **Longevity — Stroke Prevention**\n\nLongevity bukan hanya soal usia, tapi *healthspan* — kualitas hidup sehat tanpa penyakit kronis (WHO). Skema intinya: **Nutrisi → Gut Microbiome → Epigenetik & Metabolisme → Inflamasi & Imun → Fungsi Organ → Aging Rate**. Untuk pencegahan stroke, fokusnya:\n\n• Pembatasan sodium ketat & peningkatan kalium\n• Nutrisi neuroprotektif & anti-inflammaging: omega-3, folat, antioksidan, polifenol\n• Manajemen tekanan darah & gula darah terintegrasi\n• Dukungan gaya hidup: aktivitas fisik, berhenti merokok\n\nApakah ada riwayat stroke/TIA pada Anda atau keluarga?`,
+    diabetes: `🩸 **Longevity — Diabetes Management**\n\nDalam kerangka longevity, disfungsi metabolik (resistensi insulin, jalur IGF-1/mTOR) mempercepat *aging rate*. Protokol nutrisi berbasis evidens untuk manajemen gula darah:\n\n• Glycemic index management dengan karbohidrat kompleks (low GI)\n• Serat tinggi & serat prebiotik untuk gut microbiome yang mendukung metabolisme\n• Protein & lemak sehat untuk satiety\n• Rempah anti-diabetes: kayu manis, berberine, pare\n\nApakah sudah terdiagnosis atau ingin pencegahan?`,
+    hipertensi: `❤️ **Longevity — Hipertensi Management**\n\nTekanan darah tinggi berkaitan erat dengan inflamasi sistemik (*inflammaging*) dan stres oksidatif yang mempercepat penuaan pembuluh darah. Protokol DASH-inspired untuk tekanan darah yang sehat:\n\n• Tinggi kalium, magnesium, kalsium\n• Rendah sodium & lemak jenuh\n• Nitrat alami dari bit & sayuran hijau\n• Omega-3, CoQ10, dan Vitamin D3+K2 anti-inflamasi vaskular\n\nBerapa tekanan darah terakhir Anda?`
+  };
+  return intros[cat] || 'Program siap dimulai.';
+}
+
+function switchMode(mode, el) {
+  currentMode = mode;
+  document.querySelectorAll('.ctx-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+
+  if (mode === 'edukasi') {
+    openEdukasiMenu();
+  } else if (mode === 'followup') {
+    openFollowupMenu();
+  } else if (mode === 'mealplan') {
+    showMealPlan();
+  } else if (mode === 'asesmen') {
+    const hasCompleted = Object.keys(assessmentData).length > 0 && !inAssessment;
+    if (!inAssessment && !hasCompleted) {
+      startAssessment();
+    } else if (hasCompleted) {
+      addMessage(`Assessment Anda sebelumnya sudah lengkap. Anda bisa lihat kembali ringkasannya, atau mulai ulang bila kondisi Anda berubah signifikan.`, false, {
+        quickReplies: ['Unduh Ringkasan Program', 'Mulai ulang Assessment']
+      });
+    }
+  }
+}
+
+function openEdukasiMenu() {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop = '10px';
+  div.textContent = '— Edukasi Nutrisi —';
+  box.appendChild(div);
+
+  const t = showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage(`📚 **Edukasi Nutrisi**\n\nSilakan pilih topik yang ingin Anda pelajari, atau ketik pertanyaan bebas seputar nutrisi di kolom chat:`, false, {
+      quickReplies: ['Wellness Lifestyle & Sistem Tubuh', 'Longevity & Anti-Aging', 'Gut-Brain Axis & Kesehatan Mental', 'Nutrisi untuk tidur', 'Nutrisi untuk stres & mood', 'Nutrisi untuk diabetes', 'Nutrisi untuk hipertensi', 'Nutrisi untuk cegah stroke', 'Lihat Referensi Ilmiah']
+    });
+  }, 500);
+}
+
+// ── FOLLOW-UP BULANAN ──────────────────────────────────────────────
+// Berbeda dari Assessment: follow-up TIDAK mengulang seluruh kuesioner awal.
+// Fokusnya adalah PERUBAHAN sejak sesi terakhir (berat badan, tidur, stres,
+// vitals, kepatuhan program, kendala) — lalu dibandingkan dengan baseline
+// assessment atau sesi follow-up sebelumnya.
+
+function openFollowupMenu() {
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop = '10px';
+  div.textContent = '— Follow-up Bulanan —';
+  box.appendChild(div);
+
+  const t = showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const hasBaseline = Object.keys(assessmentData).length > 0;
+    if (!hasBaseline) {
+      addMessage(`Follow-up bulanan membandingkan kondisi Anda dengan hasil **Nutrition Assessment** awal. Mohon selesaikan assessment terlebih dahulu agar saya punya baseline datanya.`, false, {
+        quickReplies: ['Mulai Assessment']
+      });
+      return;
+    }
+    const sesiKe = followUpHistory.length + 1;
+    const lastDate = followUpHistory.length ? formatDate(new Date(followUpHistory[followUpHistory.length - 1].date)) : null;
+    const info = lastDate
+      ? `Check-in terakhir Anda tercatat pada **${lastDate}**. Ini akan menjadi sesi follow-up ke-${sesiKe}.`
+      : `Ini akan menjadi **check-in follow-up pertama** Anda sejak assessment awal.`;
+    addMessage(`📆 **Follow-up Bulanan**\n\n${info}\n\nApa yang ingin Anda lakukan?`, false, {
+      quickReplies: ['Isi Check-in Bulan Ini', 'Lihat Jadwal Follow-up']
+    });
+  }, 500);
+}
+
+function startAssessment() {
+  inAssessment = true;
+  assessmentStep = 0;
+  assessmentData = {};
+  document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-assess').classList.add('active');
+
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop = '10px';
+  div.textContent = '— Nutrition Assessment Dimulai —';
+  box.appendChild(div);
+
+  setTimeout(() => { askQuestion(0); }, 300);
+}
+
+function askQuestion(idx) {
+  if (idx >= assessmentQuestions.length) { finishAssessment(); return; }
+  const q = assessmentQuestions[idx];
+  // Lewati pertanyaan yang tidak relevan (mis. siklus haid untuk klien laki-laki)
+  if (q.condition && !q.condition(assessmentData)) {
+    assessmentStep = idx + 1;
+    askQuestion(assessmentStep);
+    return;
+  }
+  let text = q.q.replace('{name}', clientName || assessmentData['name'] || '');
+  setTimeout(() => { addMessage(text, false, { quickReplies: q.quick }); }, 400);
+}
+
+function handleAssessmentReply(text) {
+  if (assessmentStep >= assessmentQuestions.length) {
+    inAssessment = false;
+    handleFreeChat(text);
+    return;
+  }
+  const key = assessmentQuestions[assessmentStep].key;
+
+  // Gate persetujuan: tidak lanjut ke pertanyaan berikutnya sampai klien
+  // benar-benar menyetujui, karena data kesehatan hanya boleh dikumpulkan
+  // setelah informed consent diberikan.
+  // CATATAN BUG (diperbaiki): regex lama hanya cek substring "setuju", tapi
+  // tombol quick-reply-nya "Saya Menyetujui" — dan secara morfologi Bahasa
+  // Indonesia, imbuhan "me-" + "setuju" menjadi "meNYEtujui" (huruf "s" di
+  // awal kata dasar LEBUR/hilang, diganti nasal "ny"). Akibatnya substring
+  // "setuju" TIDAK PERNAH muncul di kata "menyetujui", sehingga user yang
+  // sudah tap "Saya Menyetujui" tetap dianggap belum setuju dan terjebak
+  // loop pesan "Mohon maaf..." tanpa bisa lanjut. Regex di bawah sekarang
+  // mengenali kedua bentuk kata ("setuju" maupun "menyetujui"/"nyetujui"),
+  // plus varian umum lain seperti "ya, saya setuju" / "oke saya setuju".
+  if (key === 'consent' && !/setuju|nyetujui/i.test(text)) {
+    addMessage('Mohon maaf, kami hanya dapat melanjutkan assessment setelah Anda menyetujui penggunaan data ini. Silakan tap **"Saya Menyetujui"** jika Anda berkenan melanjutkan.', false, { quickReplies: assessmentQuestions[assessmentStep].quick });
+    return;
+  }
+
+  assessmentData[key] = text;
+  if (key === 'name') clientName = text.split(' ')[0];
+  if (key === 'contact') {
+    const sanitized = text.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    // Prefix 'c' WAJIB ada di depan supaya id tidak pernah berupa angka murni
+    // (mis. nomor HP "08..."). Kalau id murni angka, Google Sheets bisa
+    // otomatis mengonversinya jadi tipe Number dan membuang angka 0 di
+    // depan — ini bikin pencocokan id gagal saat update data (upsert),
+    // sehingga tiap autosave malah membuat baris baru, bukan update baris
+    // yang sama.
+    currentClientId = 'c' + (sanitized || Date.now());
+    clientCreatedAt = new Date().toISOString();
+  }
+  assessmentStep++;
+
+  // Auto-save progresif: begitu kontak diketahui, setiap jawaban langsung
+  // disimpan ke database nutritionist — bukan menunggu assessment 100% selesai.
+  // Ini mencegah data hilang bila klien menutup chat di tengah jalan.
+  if (currentClientId) saveClientData();
+
+  // Skrining darurat: kalau klien melaporkan gejala red-flag, segera tampilkan
+  // peringatan untuk mencari pertolongan medis TANPA menunggu assessment selesai.
+  // Assessment tetap dilanjutkan (untuk keperluan catatan tim wellness), tapi
+  // klien sudah diberi arahan keselamatan terlebih dahulu.
+  const isEmergencyFlag = key === 'emergency_symptoms' && text !== 'Tidak ada gejala di atas';
+
+  if (assessmentStep < assessmentQuestions.length) {
+    const t = showTyping();
+    setTimeout(() => {
+      removeTyping();
+      if (isEmergencyFlag) {
+        addMessage(`🚨 **Perhatian:** gejala yang Anda laporkan (${text}) dapat merupakan tanda kondisi darurat. Kami sangat menyarankan Anda **segera mencari pertolongan medis** (IGD/dokter terdekat) sebelum melanjutkan program wellness ini. Tim kami akan menandai profil Anda untuk dirujuk.`, false);
+        setTimeout(() => askQuestion(assessmentStep), 900);
+      } else {
+        askQuestion(assessmentStep);
+      }
+    }, 700);
+  } else {
+    const t = showTyping();
+    setTimeout(() => { removeTyping(); finishAssessment(); }, 1200);
+  }
+}
+
+function computeProfile() {
+  const d = assessmentData;
+  const wh = (d.weight_height || '60 kg / 160 cm').match(/(\d+)/g) || ['60','160'];
+  const berat = parseInt(wh[0]) || 60;
+  const tinggi = parseInt(wh[1]) || 160;
+  const bmi = (berat / ((tinggi/100) * (tinggi/100))).toFixed(1);
+  let bmiStatus = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obesitas';
+
+  const actMap = { 'Sangat Sedentary':1.2,'Ringan':1.375,'Moderat':1.55,'Aktif':1.725,'Sangat Aktif':1.9 };
+  const actFactor = Object.keys(actMap).find(k => (d.activity||'').includes(k));
+  const tdee = Math.round(berat * 10 * (actMap[actFactor] || 1.375));
+
+  // simple longevity risk scoring based on declared risk factors + medical history + category
+  let riskScore = 0;
+  const rf = (d.risk_factors || '') + ' ' + (d.medical_history || '') + ' ' + (d.wellness_goal || '');
+  if (rf.includes('Merokok')) riskScore++;
+  if (rf.includes('keluarga stroke') || rf.includes('stroke')) riskScore++;
+  if (rf.includes('Kolesterol')) riskScore++;
+  if (rf.includes('Obesitas') || bmiStatus === 'Obesitas') riskScore++;
+  if (rf.includes('Hipertensi')) riskScore++;
+  if (rf.includes('Diabetes')) riskScore++;
+  if (rf.includes('Kurang aktivitas')) riskScore++;
+  let riskLevel = riskScore >= 3 ? 'Tinggi' : riskScore >= 1 ? 'Sedang' : 'Rendah';
+
+  // ── Alur Keputusan Rujukan (referral triage) ──
+  // Mengikuti kerangka non-medis tim wellness: 3 tingkat —
+  // 1) Klien sehat umum → ditangani penuh tim wellness
+  // 2) Ada keluhan ringan → konsultasikan ke dietisien
+  // 3) Gejala/penyakit aktif atau red flag vital → rujuk dokter/tim medis
+  const vitalsText = d.vitals || '';
+  const bpMatch = vitalsText.match(/(\d{2,3})\s*\/\s*(\d{2,3})/);
+  const glucoseMatch = vitalsText.match(/(?:gds|gdp|gula darah)?\D{0,6}(\d{2,3})\s*mg/i);
+  const sys = bpMatch ? parseInt(bpMatch[1]) : null;
+  const dia = bpMatch ? parseInt(bpMatch[2]) : null;
+  const glucose = glucoseMatch ? parseInt(glucoseMatch[1]) : null;
+
+  const reasons = [];
+  let referralLevel = 'sehat'; // sehat | ringan | rujuk
+
+  const hasDiagnosis = (d.medical_history || '').trim() !== '' && !/tidak ada/i.test(d.medical_history || '');
+  if (hasDiagnosis) { referralLevel = 'rujuk'; reasons.push(`Riwayat medis terdiagnosis: ${d.medical_history}`); }
+  if (sys !== null && (sys >= 180 || dia >= 120)) { referralLevel = 'rujuk'; reasons.push(`Tekanan darah sangat tinggi (${sys}/${dia} mmHg) — indikasi krisis hipertensi`); }
+  else if (sys !== null && (sys >= 140 || dia >= 90) && referralLevel !== 'rujuk') { referralLevel = 'ringan'; reasons.push(`Tekanan darah di atas normal (${sys}/${dia} mmHg)`); }
+  if (glucose !== null && glucose >= 200) { referralLevel = 'rujuk'; reasons.push(`Gula darah sangat tinggi (${glucose} mg/dL)`); }
+  else if (glucose !== null && glucose >= 126 && referralLevel !== 'rujuk') { referralLevel = 'ringan'; reasons.push(`Gula darah di atas normal (${glucose} mg/dL)`); }
+  if ((d.stress || '').includes('Sangat tinggi') && referralLevel === 'sehat') { referralLevel = 'ringan'; reasons.push('Tingkat stres sangat tinggi / indikasi burnout'); }
+
+  // Kehamilan/menyusui: kebutuhan gizi berbeda signifikan dan rencana makan
+  // pembatasan kalori standar tidak boleh diterapkan tanpa pengawasan —
+  // minimal dikonsultasikan ke dietisien, bukan ditangani otomatis oleh AI.
+  const isPregnantOrBreastfeeding = /sedang hamil|sedang menyusui/i.test(d.menstrual_cycle || '');
+  if (isPregnantOrBreastfeeding && referralLevel === 'sehat') {
+    referralLevel = 'ringan';
+    reasons.push(`Kondisi: ${d.menstrual_cycle} — kebutuhan nutrisi & kalori perlu penyesuaian khusus`);
+  }
+
+  // Riwayat pola makan yang mengarah ke gangguan makan: rencana kalori/makro
+  // otomatis TIDAK boleh diberikan tanpa tinjauan profesional terlebih dahulu.
+  if (/saat ini masih saya alami/i.test(d.eating_pattern_history || '')) {
+    referralLevel = 'rujuk';
+    reasons.push('Riwayat pola makan yang memerlukan dukungan profesional (psikolog/ahli gizi klinis) sebelum rencana kalori diberikan');
+  }
+
+  // ── Deteksi RED FLAG darurat ──
+  const emergencyReasons = [];
+  const emergencyText = d.emergency_symptoms || '';
+  if (/nyeri dada|sesak.*berat|pingsan|lemah.*satu sisi|bicara pelo|kejang|perdarahan (hebat|tak biasa)/i.test(emergencyText)) {
+    emergencyReasons.push(`Gejala darurat dilaporkan: ${emergencyText}`);
+  }
+  if (sys !== null && (sys >= 180 || dia >= 120)) emergencyReasons.push('Tekanan darah pada rentang krisis hipertensi');
+  if (glucose !== null && glucose >= 300) emergencyReasons.push('Gula darah pada rentang berbahaya (≥300 mg/dL)');
+  const emergencyFlag = emergencyReasons.length > 0;
+  if (emergencyFlag) { referralLevel = 'rujuk'; reasons.push(...emergencyReasons); }
+
+  const referralLabel = referralLevel === 'rujuk' ? 'Rujuk ke Dokter / Tim Medis'
+    : referralLevel === 'ringan' ? 'Konsultasikan ke Dietisien'
+    : 'Ditangani Penuh oleh Tim Wellness';
+  const referralTarget = referralLevel === 'rujuk'
+    ? 'Dokter Sp.GK / ahli gizi klinis, atau spesialis terkait (kardiolog, endokrinolog, psikiater sesuai kondisi)'
+    : referralLevel === 'ringan' ? 'Dietisien / nutritionist bersertifikat tim WellClub' : '-';
+
+  return { berat, tinggi, bmi, bmiStatus, tdee, riskScore, riskLevel,
+    referral: { level: referralLevel, label: referralLabel, target: referralTarget, reasons },
+    emergencyFlag, emergencyReasons };
+}
+
+function finishAssessment() {
+  inAssessment = false;
+  const d = assessmentData;
+  const name = clientName || 'Klien';
+  const p = computeProfile();
+
+  const riskClass = p.riskLevel === 'Tinggi' ? 'risk-high' : p.riskLevel === 'Sedang' ? 'risk-mid' : 'risk-low';
+  const refClass = p.referral.level === 'rujuk' ? 'risk-high' : p.referral.level === 'ringan' ? 'risk-mid' : 'risk-low';
+  const referralNote = p.referral.level === 'rujuk'
+    ? `⚠️ Berdasarkan data yang Anda berikan (${p.referral.reasons.join('; ') || 'kondisi terdiagnosis'}), program ini memerlukan koordinasi dengan **${p.referral.target}** berdampingan dengan intervensi nutrisi tim wellness. Tim wellness kami tidak melakukan diagnosis, interpretasi hasil lab, atau terapi farmakologi.`
+    : p.referral.level === 'ringan'
+    ? `ℹ️ Terdapat keluhan ringan (${p.referral.reasons.join('; ')}) yang sebaiknya dikonsultasikan lebih lanjut ke **${p.referral.target}** untuk penyesuaian program.`
+    : `✅ Berdasarkan data yang Anda berikan, program dapat ditangani penuh oleh tim wellness non-medis kami.`;
+
+  const cardHTML = `
+  <div class="assessment-card" style="margin-top:10px">
+    <h4>📋 Hasil Nutrition Assessment — ${name}</h4>
+    <div class="card-sub">Program: ${categoryNames[currentCategory]} · Tanggal: ${formatDate(new Date())}</div>
+    <div class="assess-row"><span class="assess-label">Usia / Jenis Kelamin</span><span class="assess-val">${d.age||'-'} / ${d.gender||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">BB / TB</span><span class="assess-val">${d.weight_height||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">BMI</span><span class="assess-val">${p.bmi} – ${p.bmiStatus}</span></div>
+    <div class="assess-row"><span class="assess-label">Est. Kebutuhan Kalori</span><span class="assess-val">${p.tdee} kkal/hari</span></div>
+    <div class="assess-row"><span class="assess-label">Aktivitas Fisik</span><span class="assess-val">${d.activity||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Detail Olahraga</span><span class="assess-val">${d.exercise_detail||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Hidrasi Harian</span><span class="assess-val">${d.hydration||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Kualitas Tidur</span><span class="assess-val">${d.sleep_quality||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Tingkat Stres</span><span class="assess-val">${d.stress||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Obat / Suplemen Rutin</span><span class="assess-val">${d.medications||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Tekanan Darah / Gula Darah</span><span class="assess-val">${d.vitals||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Faktor Risiko</span><span class="assess-val">${d.risk_factors||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Riwayat Medis</span><span class="assess-val">${d.medical_history||'-'}</span></div>
+    ${d.menstrual_cycle ? `<div class="assess-row"><span class="assess-label">Siklus Haid</span><span class="assess-val">${d.menstrual_cycle}</span></div>` : ''}
+    <div class="assess-row"><span class="assess-label">Tujuan Wellness</span><span class="assess-val">${d.wellness_goal||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Risiko Longevity (indikatif)</span><span class="assess-val">${p.riskLevel}<span class="risk-badge ${riskClass}">${p.riskLevel}</span></span></div>
+    <div class="assess-row"><span class="assess-label">Alur Rujukan (Batas Peran)</span><span class="assess-val">${p.referral.label}<span class="risk-badge ${refClass}">${p.referral.label}</span></span></div>
+    ${p.emergencyFlag ? `<div class="disclaimer-note" style="background:#f6e2e2;border-color:rgba(181,63,63,0.4);color:#7a2a2a">🚨 <strong>Perlu perhatian segera:</strong> ${p.emergencyReasons.join('; ')}. Klien disarankan mencari pertolongan medis sesegera mungkin.</div>` : ''}
+    <div class="disclaimer-note">${referralNote}</div>
+    <div class="disclaimer-note">Skor risiko bersifat indikatif berdasarkan kuesioner mandiri, bukan diagnosis medis. Evaluasi lanjutan akan dilakukan oleh nutritionist bersertifikat kami.</div>
+  </div>`;
+
+  addMessage(`✅ Assessment selesai! Berikut ringkasan profil nutrisi **${name}**:`, false, { card: cardHTML });
+  saveClientData();
+
+  const allergyProfile = getAllergyProfile();
+  if (allergyProfile.length) {
+    setTimeout(() => {
+      addMessage(`⚠️ Saya mencatat **pantangan/alergi makanan** Anda: **${allergyProfile.map(r => r.label).join(', ')}**.\n\nSeluruh rekomendasi **Meal Plan** dan **Suplemen** yang saya susun untuk Anda akan otomatis disesuaikan agar tidak memuat bahan tersebut. Tim nutritionist kami tetap akan memverifikasi ulang sebelum program dimulai.`, false);
+    }, 500);
+  }
+
+  setTimeout(() => {
+    const lifestyleHTML = getLifestyleCard();
+    addMessage(`Berdasarkan hasil assessment, saya merekomendasikan **${getPersonalizedReco()}**\n\nBerikut juga rekomendasi gaya hidup pendukung program:`, false, { card: lifestyleHTML });
+  }, 900);
+
+  setTimeout(() => {
+    const followupHTML = getFollowupCard();
+    addMessage(`📆 Program ini didampingi oleh nutritionist kami dengan jadwal evaluasi berkala:`, false, { card: followupHTML });
+  }, 1800);
+
+  setTimeout(() => {
+    lastReportHTML = buildPrintableReport(name, d, p, currentCategory);
+    addMessage(`Apakah Anda ingin saya buatkan **Personal Meal Plan 7 hari** yang disesuaikan dengan profil dan tujuan wellness ${name}, atau langsung **unduh ringkasan program** ini untuk dipelajari sebelum memulai?`, false, {
+      quickReplies: ['Ya, buat Meal Plan sekarang', 'Unduh Ringkasan Program', 'Lihat suplemen yang direkomendasikan']
+    });
+  }, 2600);
+}
+
+function getPersonalizedReco() {
+  const goal = assessmentData.wellness_goal || '';
+  const medical = assessmentData.medical_history || '';
+  if (medical.includes('stroke') || goal.includes('stroke') || currentCategory === 'stroke') return 'pendekatan **Neuroprotective & Low-Sodium Nutrition** untuk mendukung kesehatan pembuluh darah otak dan pencegahan stroke.';
+  if (medical.includes('Diabetes') || goal.includes('gula darah') || currentCategory === 'diabetes') return 'pendekatan **Low Glycemic Index + High Fiber** dengan penekanan pada rempah anti-diabetes Indonesia.';
+  if (medical.includes('Hipertensi') || goal.includes('tekanan darah') || currentCategory === 'hipertensi') return 'diet **DASH-modified** dengan tinggi kalium dan magnesium dari bahan pangan lokal.';
+  if (goal.includes('tidur') || goal.includes('Tidur')) return 'protokol **Sleep Nutrition** dengan adaptogen malam dan makanan tinggi triptofan & magnesium.';
+  if (goal.includes('stres') || goal.includes('mood') || goal.includes('Mood')) return 'pendekatan **Gut-Brain Axis Optimization** dengan probiotik, omega-3, dan adaptogen pilihan.';
+  if (goal.includes('energi') || goal.includes('Energi')) return 'strategi **Recharge & Rebalance Nutrition** dengan fokus pada iron, B12, dan adaptogen adrenal.';
+  return 'pendekatan **Wellness Lifestyle Holistic** yang menyeimbangkan makronutrien, anti-inflamasi, dan pangan fungsional lokal Indonesia.';
+}
+
+function getLifestyleCard() {
+  const cat = currentCategory;
+  const base = [
+    { icon:'💧', title:'Hidrasi', text:'Minum air putih minimal 8 gelas/hari, tingkatkan bila aktivitas fisik tinggi.' },
+    { icon:'🚶', title:'Aktivitas Fisik', text:'Bergerak aktif minimal 150 menit/minggu (jalan cepat, yoga, atau olahraga ringan).' },
+    { icon:'😴', title:'Rutinitas Tidur', text:'Tidur & bangun di jam yang konsisten, hindari layar 1 jam sebelum tidur.' }
+  ];
+  const extra = {
+    wellness: [{ icon:'🌿', title:'Mindful Eating', text:'Makan tanpa distraksi, kunyah perlahan untuk mendukung pencernaan.' }],
+    sleep: [{ icon:'🕯️', title:'Wind-down Ritual', text:'Aromaterapi lavender/chamomile 30 menit sebelum tidur, redupkan cahaya ruangan.' }],
+    recharge: [{ icon:'🧘', title:'Manajemen Stres', text:'Latihan pernapasan atau meditasi singkat 10 menit/hari untuk regulasi kortisol.' }],
+    stroke: [{ icon:'🚭', title:'Bebas Rokok & Alkohol', text:'Berhenti merokok dan batasi alkohol untuk menjaga elastisitas pembuluh darah.' }, { icon:'🩺', title:'Pemantauan Rutin', text:'Cek tekanan darah & gula darah mandiri secara berkala, laporkan ke nutritionist.' }],
+    diabetes: [{ icon:'⏱️', title:'Pola Makan Teratur', text:'Jaga jarak antarwaktu makan agar gula darah lebih stabil, hindari melewatkan makan.' }],
+    hipertensi: [{ icon:'🧂', title:'Batasi Garam', text:'Kurangi konsumsi garam dan makanan olahan/tinggi sodium secara bertahap.' }]
+  };
+  const items = base.concat(extra[cat] || []);
+  const rows = items.map(it => `
+    <div class="lifestyle-item">
+      <div class="lifestyle-icon">${it.icon}</div>
+      <div><strong>${it.title}</strong><span>${it.text}</span></div>
+    </div>`).join('');
+  return `<div class="lifestyle-card"><h4>🌱 Rekomendasi Gaya Hidup</h4>${rows}</div>`;
+}
+
+function getFollowupCard() {
+  const today = new Date();
+  const steps = [0,1,2,3].map(i => {
+    const d = new Date(today);
+    d.setMonth(d.getMonth() + i);
+    return d;
+  });
+  const labels = [
+    { badge:'Minggu 1', title:'Onboarding & Kick-off', text:'Peninjauan hasil assessment bersama nutritionist, penyesuaian meal plan awal.' },
+    { badge:'Bulan 1', title:'Follow-up Konsultasi #1', text:'Evaluasi kepatuhan program, penyesuaian porsi & menu, cek keluhan.' },
+    { badge:'Bulan 2', title:'Follow-up Konsultasi #2', text:'Review progres berat badan/BMI, energi, tidur, dan (bila relevan) tekanan darah/gula darah.' },
+    { badge:'Bulan 3', title:'Follow-up Konsultasi #3', text:'Evaluasi menyeluruh & penyesuaian target jangka panjang bersama nutritionist.' }
+  ];
+  const rows = labels.map((l, i) => `
+    <div class="followup-step">
+      <div class="fu-badge">${l.badge}</div>
+      <div><strong>${l.title} — ${formatDate(steps[i])}</strong><span>${l.text}</span></div>
+    </div>`).join('');
+  return `<div class="followup-card"><h4>📆 Jadwal Follow-up Bulanan</h4><div class="card-sub">Dipantau langsung oleh nutritionist bersertifikat WellClub — sesi dapat dilakukan tatap muka atau daring.</div>${rows}<div class="disclaimer-note">Jadwal indikatif, dapat disesuaikan dengan ketersediaan klien dan nutritionist saat program dimulai.</div></div>`;
+}
+
+function formatDate(d) {
+  const bulan = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  return d.getDate() + ' ' + bulan[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+// ── FOLLOW-UP CHECK-IN FLOW ─────────────────────────────────────────
+// Menangkap kondisi TERKINI klien, lalu membandingkannya dengan baseline
+// assessment (bila belum pernah check-in) atau sesi follow-up terakhir.
+
+function startFollowup() {
+  inFollowup = true;
+  followupStep = 0;
+  followupData = {};
+
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop = '10px';
+  div.textContent = '— Check-in Follow-up Dimulai —';
+  box.appendChild(div);
+
+  setTimeout(() => { askFollowupQuestion(0); }, 300);
+}
+
+function askFollowupQuestion(idx) {
+  if (idx >= followupQuestions.length) { finishFollowup(); return; }
+  const q = followupQuestions[idx];
+  let text = q.q.replace('{name}', clientName || assessmentData['name'] || 'Klien');
+  setTimeout(() => { addMessage(text, false, { quickReplies: q.quick }); }, 400);
+}
+
+function handleFollowupReply(text) {
+  if (followupStep >= followupQuestions.length) {
+    inFollowup = false;
+    handleFreeChat(text);
+    return;
+  }
+  const key = followupQuestions[followupStep].key;
+  followupData[key] = text;
+  followupStep++;
+
+  if (followupStep < followupQuestions.length) {
+    const t = showTyping();
+    setTimeout(() => { removeTyping(); askFollowupQuestion(followupStep); }, 700);
+  } else {
+    const t = showTyping();
+    setTimeout(() => { removeTyping(); finishFollowup(); }, 1200);
+  }
+}
+
+const SLEEP_ORDER = ['Sangat buruk (< 5 jam, sering terbangun)','Kurang (5–6 jam)','Cukup (6–7 jam, sering lelah)','Baik (7–8 jam)','Sangat baik (> 8 jam, segar)'];
+const STRESS_ORDER = ['Sangat tinggi – burnout/lelah ekstrem','Tinggi – sering overthinking','Sedang – kadang cemas','Rendah – merasa tenang']; // index 0 = terburuk, index 3 = terbaik
+
+function trendArrow(curIdx, baseIdx) {
+  if (curIdx === -1 || baseIdx === -1 || curIdx === baseIdx) return '→ Stabil';
+  return curIdx > baseIdx ? '↑ Membaik' : '↓ Menurun';
+}
+
+function finishFollowup() {
+  inFollowup = false;
+  const name = clientName || 'Klien';
+
+  // Baseline pembanding: sesi follow-up terakhir, atau assessment awal bila ini check-in pertama
+  const prev = followUpHistory.length ? followUpHistory[followUpHistory.length - 1] : null;
+  const baseWeightRaw = prev ? prev.weight_now : (assessmentData.weight_height || '');
+  const baseWeight = prev ? prev.weight_now : (parseFloat(((assessmentData.weight_height || '').match(/\d+([.,]\d+)?/) || [])[0]) || null);
+  const baseSleep = prev ? prev.sleep_quality_now : assessmentData.sleep_quality;
+  const baseStress = prev ? prev.stress_now : assessmentData.stress;
+
+  const entry = Object.assign({ date: new Date().toISOString(), sesi: followUpHistory.length + 1 }, followupData);
+  const parsedWeight = parseFloat((followupData.weight_now || '').toString().replace(',', '.').match(/\d+(\.\d+)?/));
+  entry.weight_now = isNaN(parsedWeight) ? null : parsedWeight;
+
+  followUpHistory.push(entry);
+
+  const cardHTML = getProgressCard(entry, baseWeight, baseSleep, baseStress);
+  addMessage(`✅ Check-in Bulan ke-${entry.sesi} selesai! Berikut perbandingan progres **${name}** sejak sesi sebelumnya:`, false, { card: cardHTML });
+  saveClientData();
+
+  setTimeout(() => {
+    addMessage(`Catatan ini akan diteruskan ke nutritionist untuk ditinjau, dan meal plan akan disesuaikan bila diperlukan pada sesi berikutnya.`, false, {
+      quickReplies: ['Lihat Jadwal Follow-up', 'Unduh Ringkasan Program', 'Lihat Meal Plan']
+    });
+  }, 900);
+}
+
+function getProgressCard(entry, baseWeight, baseSleep, baseStress) {
+  let weightRow = 'Data belum lengkap';
+  if (entry.weight_now && baseWeight) {
+    const delta = (entry.weight_now - baseWeight).toFixed(1);
+    const deltaLabel = delta > 0 ? `+${delta} kg` : (delta < 0 ? `${delta} kg` : 'Stabil');
+    weightRow = `${baseWeight} kg → ${entry.weight_now} kg (${deltaLabel})`;
+  } else if (entry.weight_now) {
+    weightRow = `${entry.weight_now} kg (belum ada data pembanding)`;
+  }
+
+  const curSleepIdx = SLEEP_ORDER.indexOf(entry.sleep_quality_now);
+  const baseSleepIdx = SLEEP_ORDER.indexOf(baseSleep);
+  const sleepTrend = trendArrow(curSleepIdx, baseSleepIdx);
+
+  const curStressIdx = STRESS_ORDER.indexOf(entry.stress_now);
+  const baseStressIdx = STRESS_ORDER.indexOf(baseStress);
+  const stressTrend = trendArrow(curStressIdx, baseStressIdx);
+
+  return `<div class="assessment-card">
+    <h4>📊 Progres Bulan ke-${entry.sesi} — Dibanding Sesi Sebelumnya</h4>
+    <div class="card-sub">Tanggal check-in: ${formatDate(new Date(entry.date))}</div>
+    <div class="assess-row"><span class="assess-label">Berat Badan</span><span class="assess-val">${weightRow}</span></div>
+    <div class="assess-row"><span class="assess-label">Kualitas Tidur</span><span class="assess-val">${entry.sleep_quality_now||'-'} (${sleepTrend})</span></div>
+    <div class="assess-row"><span class="assess-label">Tingkat Stres</span><span class="assess-val">${entry.stress_now||'-'} (${stressTrend})</span></div>
+    <div class="assess-row"><span class="assess-label">Tekanan Darah / Gula Darah</span><span class="assess-val">${entry.vitals_now||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Kepatuhan Program</span><span class="assess-val">${entry.adherence||'-'}</span></div>
+    <div class="assess-row"><span class="assess-label">Kendala Bulan Ini</span><span class="assess-val">${entry.obstacles||'-'}</span></div>
+    <div class="disclaimer-note">Perbandingan bersifat indikatif dari laporan mandiri klien. Nutritionist akan meninjau tren ini dan menyesuaikan meal plan/gaya hidup pada sesi berikutnya.</div>
+  </div>`;
+}
+
+function getFollowupHistoryCard() {
+  if (!followUpHistory.length) return '';
+  const rows = followUpHistory.map(e => `
+    <div class="followup-step">
+      <div class="fu-badge">Sesi ${e.sesi}</div>
+      <div><strong>${formatDate(new Date(e.date))} — BB: ${e.weight_now || '-'} kg</strong><span>Tidur: ${e.sleep_quality_now||'-'} · Stres: ${e.stress_now||'-'} · Kepatuhan: ${e.adherence||'-'}</span></div>
+    </div>`).join('');
+  return `<div class="followup-card"><h4>🗂️ Riwayat Check-in</h4>${rows}</div>`;
+}
+
+function showMealPlan() {
+  document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-meal').classList.add('active');
+
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.style.marginTop='10px';
+  div.textContent = '— Personal Meal Plan —';
+  box.appendChild(div);
+
+  const t = showTyping();
+  setTimeout(() => {
+    removeTyping();
+    const name = clientName || 'Klien';
+    const cat = currentCategory;
+    const cardHTML = getMealPlanCard(cat);
+    addMessage(`🍽️ Berikut **Personal Meal Plan** untuk ${name} — Program **${categoryNames[cat]}**:\n\n_(Meal plan ini merupakan contoh harian dan akan disesuaikan lebih lanjut oleh nutritionist berdasarkan preferensi, ketersediaan bahan lokal, dan hasil follow-up bulanan)_`, false, { card: cardHTML });
+
+    setTimeout(() => {
+      addMessage(`💡 **Tips Implementasi:**\n\n• Siapkan bahan pokok seminggu sekali (batch cooking)\n• Manfaatkan produk herbal & essential oil Rumah Atsiri sebagai pelengkap wellness\n• Minum air putih minimal 8 gelas/hari\n• Konsumsi makan malam minimal 2–3 jam sebelum tidur\n\nApakah ada bagian yang ingin disesuaikan?`, false, {
+        quickReplies: ['Ganti alternatif bahan', 'Hitung kalori detail', 'Tambahkan suplemen', 'Unduh Ringkasan Program']
+      });
+    }, 800);
+  }, 1200);
+}
+
+function getMealPlanCard(cat) {
+  // Setiap kondisi punya 2 varian menu harian yang bergantian setiap kali
+  // "Generate Meal Plan" ditekan lagi — supaya klien tidak bosan makan menu
+  // yang itu-itu saja, dan tetap punya cadangan pilihan kalau satu varian
+  // bahannya kebetulan tidak ada di pasar hari itu.
+  //
+  // Semua bahan dipilih yang UMUM DIJUAL DI PASAR TRADISIONAL/WARUNG di
+  // Indonesia — bahan impor/khusus (quinoa, spirulina, kefir, kacang brazil,
+  // ceri, kiwi, matcha, beras shirataki) diganti padanan lokal yang setara
+  // secara nutrisi (singkong/ubi/jagung, kacang tanah/kemiri/kacang mete,
+  // yogurt plain, pisang/kurma, teh hijau biasa, dsb) agar mudah direalisasikan.
+  const mealPlanVariants = {
+    wellness: [
+      [ // Varian A
+        { time:'06.00', name:'Air Hangat + Perasan Jeruk Nipis', note:'Hidrasi & vitamin C pagi hari', tags:['energy','longevity'] },
+        { time:'07.00', name:'Nasi Merah / Singkong Rebus + Telur Rebus + Tumis Kangkung', note:'Karbohidrat kompleks + protein', tags:['energy'] },
+        { time:'10.00', name:'Pisang + Kacang Tanah Rebus', note:'Energi stabil, lemak sehat lokal', tags:['energy'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Kembung Bakar + Tumis Buncis + Tempe', note:'Karbohidrat kompleks + protein + probiotik', tags:['longevity'] },
+        { time:'15.30', name:'Pepaya / Jambu Biji + Yogurt Plain', note:'Serat & probiotik', tags:['mood'] },
+        { time:'19.00', name:'Sup Ayam Bening + Ubi Rebus + Lalapan', note:'Ringan & hangat, anti-inflamasi', tags:['sleep','energy'] },
+        { time:'21.00', name:'Susu Kedelai Hangat + Kunyit (Jamu Kunyit Asam Hangat)', note:'Relaksasi & anti-inflamasi malam', tags:['sleep'] }
+      ],
+      [ // Varian B
+        { time:'06.00', name:'Air Kelapa Muda Tawar', note:'Hidrasi & elektrolit alami', tags:['energy'] },
+        { time:'07.00', name:'Bubur Kacang Hijau (gula aren sedikit) + Telur Rebus', note:'Protein & serat', tags:['energy'] },
+        { time:'10.00', name:'Jagung Rebus + Alpukat', note:'Serat & lemak sehat', tags:['energy','mood'] },
+        { time:'12.30', name:'Nasi Merah + Ayam Kampung Panggang + Tumis Daun Singkong + Tahu', note:'Protein tinggi + folat', tags:['longevity'] },
+        { time:'15.30', name:'Semangka / Nanas + Kacang Mete', note:'Hidrasi & mineral', tags:['mood'] },
+        { time:'19.00', name:'Pecel Sayur (bumbu kacang secukupnya) + Tempe Bacem + Nasi Merah', note:'Serat tinggi, protein nabati', tags:['sleep','energy'] },
+        { time:'21.00', name:'Wedang Jahe Serai Hangat', note:'Relaksasi malam, anti-inflamasi', tags:['sleep'] }
+      ]
+    ],
+    sleep: [
+      [ // Varian A
+        { time:'07.00', name:'Pisang + Telur Rebus + Segelas Susu Kedelai', note:'Triptofan alami (prekursor serotonin)', tags:['sleep'] },
+        { time:'10.00', name:'Kacang Tanah Rebus + Coklat Bubuk Tanpa Gula (seduh hangat)', note:'Magnesium & flavonoid', tags:['sleep','mood'] },
+        { time:'12.30', name:'Ayam Panggang + Nasi Merah + Alpukat + Sayur Bening', note:'Triptofan + vitamin B6 (kofaktor sintesis serotonin→melatonin)', tags:['sleep','energy'] },
+        { time:'15.00', name:'Pisang + Selai Kacang Tanah Alami', note:'Kalium & magnesium untuk relaksasi otot', tags:['sleep'] },
+        { time:'18.30', name:'Ikan Kembung / Tongkol Bakar + Buncis Kukus + Kentang Rebus', note:'Omega-3 + triptofan', tags:['sleep','mood'] },
+        { time:'20.00', name:'Tempe Kukus Porsi Kecil + Acar Sayur Fermentasi', note:'GABA dari fermentasi — menenangkan sistem saraf', tags:['sleep'] },
+        { time:'20.30', name:'Susu Hangat + Kunyit + Kayu Manis + Madu (Golden Milk versi lokal)', note:'Kalsium + anti-inflamasi, mendukung sintesis melatonin', tags:['sleep'] }
+      ],
+      [ // Varian B
+        { time:'07.00', name:'Bubur Ayam Sederhana (tanpa kerupuk) + Telur', note:'Karbohidrat mudah cerna + protein pagi', tags:['sleep'] },
+        { time:'10.00', name:'Kurma 2–3 Butir + Kacang Tanah / Kacang Mete Secukupnya', note:'Gula alami rendah + magnesium', tags:['sleep'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Lele / Nila Goreng + Lalapan + Sambal Tomat', note:'Protein & serat', tags:['sleep','energy'] },
+        { time:'15.00', name:'Pisang Rebus + Susu Kedelai', note:'Triptofan & kalsium', tags:['sleep'] },
+        { time:'18.30', name:'Sup Ikan Kembung Bening + Wortel + Labu Siam', note:'Omega-3 ringan untuk malam hari', tags:['sleep','mood'] },
+        { time:'20.00', name:'Yogurt Plain + Sedikit Madu', note:'Probiotik menenangkan sistem pencernaan', tags:['sleep'] },
+        { time:'20.30', name:'Wedang Serai + Jahe + Sedikit Madu', note:'Relaksasi malam alami', tags:['sleep'] }
+      ]
+    ],
+    recharge: [
+      [ // Varian A
+        { time:'07.00', name:'Smoothie Pisang-Coklat (pisang, susu kedelai, coklat bubuk tanpa gula, kayu manis)', note:'Serotonin & dopamin booster alami', tags:['mood','energy'] },
+        { time:'10.00', name:'Yogurt Plain + Buah Naga / Stroberi Lokal', note:'Gut-brain axis support (mikrobiome penghasil GABA)', tags:['mood'] },
+        { time:'12.30', name:'Ikan Kembung / Tongkol + Nasi Merah + Alpukat + Kacang Panjang', note:'Omega-3 + folat — menurunkan reaktivitas HPA Axis', tags:['mood','longevity'] },
+        { time:'15.00', name:'Jambu Biji + Kacang Tanah', note:'Vitamin C (fungsi adrenal) + selenium dari kacang lokal', tags:['mood'] },
+        { time:'17.00', name:'Teh Hijau Lokal (rendah kafein, sore hari)', note:'L-Theanine alami — relaksasi aktif tanpa sedasi', tags:['mood'] },
+        { time:'19.00', name:'Sup Tempe/Tahu + Sayur Tumis + Nasi Merah', note:'Probiotik fermentasi + vitamin B5', tags:['mood','sleep'] },
+        { time:'21.00', name:'Wedang Sereh + Madu + Kacang Kenari / Mete', note:'Relaksasi malam, mendukung pemulihan sistem saraf', tags:['mood','sleep'] }
+      ],
+      [ // Varian B
+        { time:'07.00', name:'Bubur Kacang Hijau Hangat + Pisang', note:'Karbohidrat menenangkan + serotonin booster', tags:['mood','energy'] },
+        { time:'10.00', name:'Tempe / Tahu Kukus + Air Putih Hangat', note:'Probiotik nabati sederhana', tags:['mood'] },
+        { time:'12.30', name:'Ayam Kampung Panggang + Nasi Merah + Tumis Daun Pepaya / Kangkung', note:'Protein & folat', tags:['mood','longevity'] },
+        { time:'15.00', name:'Semangka + Kacang Mete', note:'Hidrasi & mineral penenang', tags:['mood'] },
+        { time:'17.00', name:'Teh Melati Hangat', note:'Relaksasi ringan sore hari', tags:['mood'] },
+        { time:'19.00', name:'Sup Tahu-Kecap ala Rumah + Sayur + Nasi Merah', note:'Fermentasi lokal, ringan di lambung', tags:['mood','sleep'] },
+        { time:'21.00', name:'Wedang Jahe Hangat + Madu', note:'Relaksasi malam', tags:['mood','sleep'] }
+      ]
+    ],
+    stroke: [
+      [ // Varian A
+        { time:'06.30', name:'Air Putih Hangat + Perasan Jeruk Nipis', note:'Hidrasi awal, mendukung sirkulasi', tags:['cardio'] },
+        { time:'08.00', name:'Bubur Oat / Havermut + Pisang + Wijen', note:'Serat & antioksidan untuk pembuluh darah', tags:['cardio','longevity'] },
+        { time:'10.30', name:'Alpukat + Kacang Tanah Segenggam', note:'Lemak sehat & kalium tinggi', tags:['cardio'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Kembung Panggang + Bayam + Wortel Kukus', note:'Omega-3, folat, kalium — rendah sodium', tags:['cardio','longevity'] },
+        { time:'15.30', name:'Pisang + Yogurt Plain', note:'Kalium & probiotik', tags:['cardio'] },
+        { time:'19.00', name:'Sup Sayur Bening (tanpa garam berlebih) + Tahu Kukus + Ubi', note:'Rendah sodium, tinggi serat', tags:['cardio','longevity'] },
+        { time:'20.30', name:'Air Rebusan Daun Salam / Teh Hijau Tawar', note:'Bebas kafein, mendukung relaksasi vaskular', tags:['cardio'] }
+      ],
+      [ // Varian B
+        { time:'06.30', name:'Air Kelapa Muda Tawar', note:'Elektrolit alami, mendukung sirkulasi', tags:['cardio'] },
+        { time:'08.00', name:'Singkong / Ubi Rebus + Telur Rebus', note:'Karbohidrat kompleks + protein', tags:['cardio','longevity'] },
+        { time:'10.30', name:'Pepaya + Kacang Mete', note:'Serat & lemak sehat', tags:['cardio'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Tongkol Bakar Bumbu Rempah + Tumis Kangkung + Wortel', note:'Omega-3 & kalium, rendah sodium', tags:['cardio','longevity'] },
+        { time:'15.30', name:'Jeruk + Yogurt Plain', note:'Vitamin C & probiotik', tags:['cardio'] },
+        { time:'19.00', name:'Sup Bening Labu Siam + Tahu + Nasi Merah', note:'Rendah sodium, tinggi serat', tags:['cardio','longevity'] },
+        { time:'20.30', name:'Wedang Jahe Tawar (tanpa gula)', note:'Menghangatkan, mendukung sirkulasi', tags:['cardio'] }
+      ]
+    ],
+    diabetes: [
+      [ // Varian A
+        { time:'06.30', name:'Air Rebusan Daun Salam Hangat + Rebusan Pare', note:'Pengatur gula darah alami', tags:['longevity'] },
+        { time:'08.00', name:'Telur Rebus 2 btr + Oat / Havermut + Kacang Tanah', note:'Protein + beta-glucan serat', tags:['longevity'] },
+        { time:'10.30', name:'Mentimun + Kacang Rebus Segenggam', note:'GI rendah, serat tinggi', tags:['longevity'] },
+        { time:'12.30', name:'Nasi Merah (½ porsi) + Ikan + Tahu/Tempe + 2 jenis sayur', note:'Balanced plate, low GI', tags:['longevity'] },
+        { time:'15.30', name:'Jambu Biji / Pepaya (porsi kecil) + Kacang Tanah', note:'Vitamin C + lemak sehat', tags:['longevity'] },
+        { time:'19.00', name:'Sayur Bening + Ikan Kukus + Ubi Rebus (porsi kecil)', note:'Rendah kalori, serat tinggi, GI rendah', tags:['longevity'] },
+        { time:'20.30', name:'Air Rebusan Daun Salam / Wedang Kayu Manis Tawar', note:'Insulin sensitizer alami', tags:['longevity'] }
+      ],
+      [ // Varian B
+        { time:'06.30', name:'Wedang Kayu Manis Tawar', note:'Alternatif pengatur gula darah alami', tags:['longevity'] },
+        { time:'08.00', name:'Tahu / Tempe Kukus + Sayur Rebus', note:'Protein nabati, GI rendah', tags:['longevity'] },
+        { time:'10.30', name:'Kacang Panjang / Buncis Rebus + Telur Rebus', note:'Serat & protein', tags:['longevity'] },
+        { time:'12.30', name:'Nasi Merah (½ porsi) + Ayam Tanpa Kulit Panggang + Tumis Kol + Wortel', note:'Protein tanpa lemak jenuh berlebih', tags:['longevity'] },
+        { time:'15.30', name:'Apel / Jambu Biji Potong', note:'Serat & vitamin C, GI rendah', tags:['longevity'] },
+        { time:'19.00', name:'Sup Bening Sayuran + Tempe + Sedikit Nasi Merah', note:'GI rendah, tetap mengenyangkan', tags:['longevity'] },
+        { time:'20.30', name:'Teh Hijau Tawar', note:'Antioksidan tanpa tambahan gula', tags:['longevity'] }
+      ]
+    ],
+    hipertensi: [
+      [ // Varian A
+        { time:'06.30', name:'Air Putih + Timun Rebus', note:'Hidrasi rendah sodium', tags:['cardio'] },
+        { time:'08.00', name:'Bubur Oat + Pisang + Kacang Tanah', note:'Kalium & magnesium tinggi', tags:['cardio'] },
+        { time:'10.30', name:'Jus Wortel + Jeruk (tanpa gula tambahan)', note:'Antioksidan & kalium untuk tekanan darah', tags:['cardio'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Panggang Bumbu Rempah (tanpa garam) + Sayur Hijau', note:'DASH-style, rendah sodium', tags:['cardio','longevity'] },
+        { time:'15.30', name:'Yogurt Plain + Pisang', note:'Kalsium & kalium', tags:['cardio'] },
+        { time:'19.00', name:'Sup Sayur + Tahu/Tempe + Ubi Kukus', note:'Rendah sodium, tinggi serat', tags:['cardio','longevity'] },
+        { time:'20.30', name:'Wedang Sereh Tawar / Teh Rosella (tanpa gula)', note:'Mendukung relaksasi pembuluh darah', tags:['cardio'] }
+      ],
+      [ // Varian B
+        { time:'06.30', name:'Air Rebusan Seledri Hangat', note:'Membantu relaksasi pembuluh darah', tags:['cardio'] },
+        { time:'08.00', name:'Singkong / Ubi Rebus + Telur Rebus', note:'Kalium & protein', tags:['cardio'] },
+        { time:'10.30', name:'Semangka / Melon Potong', note:'Hidrasi & kalium tinggi', tags:['cardio'] },
+        { time:'12.30', name:'Nasi Merah + Ikan Bakar Bumbu Kunyit-Jahe (tanpa garam) + Tumis Buncis', note:'Rendah sodium, kaya rempah anti-inflamasi', tags:['cardio','longevity'] },
+        { time:'15.30', name:'Jambu Biji + Kacang Mete', note:'Vitamin C & magnesium', tags:['cardio'] },
+        { time:'19.00', name:'Sup Bening Labu Siam + Tempe + Nasi Merah', note:'Rendah sodium', tags:['cardio','longevity'] },
+        { time:'20.30', name:'Air Rebusan Daun Salam Tawar', note:'Mendukung relaksasi pembuluh darah', tags:['cardio'] }
+      ]
+    ]
+  };
+
+  const variants = mealPlanVariants[cat] || mealPlanVariants.wellness;
+  const idx = (mealPlanVariantIndex[cat] || 0) % variants.length;
+  mealPlanVariantIndex[cat] = idx + 1; // klik "Generate Meal Plan" lagi -> bergantian ke varian lain
+  const meals = variants[idx];
+  const variantLabel = String.fromCharCode(65 + idx); // 0->A, 1->B
+  const allergyProfile = getAllergyProfile();
+  let rows = meals.map(m => {
+    let displayName = m.name;
+    let displayNote = m.note;
+    let flagged = false;
+    if (allergyProfile.length) {
+      const rName = applyAllergySafeText(m.name, allergyProfile);
+      const rNote = applyAllergySafeText(m.note, allergyProfile);
+      displayName = rName.text;
+      displayNote = rNote.text;
+      flagged = rName.changed || rNote.changed;
+    }
+    const tags = m.tags.map(t => {
+      const tagLabels = { sleep:'Tidur', mood:'Mood', energy:'Energi', longevity:'Longevity', cardio:'Kardio-Protektif' };
+      return `<span class="tag-pill tag-${t}">${tagLabels[t]||t}</span>`;
+    }).join('');
+    const allergyBadge = flagged ? `<span class="tag-pill" style="background:#f6e7e3;color:#b5543f;border:1px solid rgba(181,84,63,0.35)">🔁 Disesuaikan – Alergi</span>` : '';
+    return `<div class="meal-row">
+      <div class="meal-time">${m.time}</div>
+      <div class="meal-content">
+        <strong>${displayName}</strong>
+        <span>${displayNote}</span>
+        <div style="margin-top:3px">${tags}${allergyBadge}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const allergyBanner = allergyProfile.length
+    ? `<div class="disclaimer-note" style="background:#f6e7e3;border-color:rgba(181,84,63,0.35);color:#7a3a2a">⚠️ <strong>Pantangan/alergi terdeteksi:</strong> ${allergyProfile.map(r => r.label).join(', ')}. Menu yang mengandung bahan tersebut sudah otomatis diganti dengan alternatif yang aman (ditandai 🔁). Nutritionist kami tetap akan memverifikasi ulang sebelum program dimulai.</div>`
+    : '';
+
+  return `<div class="meal-plan-card"><h4>📅 Meal Plan Harian – ${categoryNames[cat]} <span style="font-size:11px;font-weight:400;color:var(--text-muted)">(Varian ${variantLabel})</span></h4><div class="card-sub">Contoh 1 hari dengan bahan yang mudah ditemukan di pasar tradisional — klik "Generate Meal Plan" lagi untuk melihat varian menu lainnya, dan disesuaikan lebih lanjut oleh nutritionist</div>${allergyBanner}${rows}</div>`;
+}
+
+function buildPrintableReport(name, d, p, cat) {
+  const riskClass = p.riskLevel === 'Tinggi' ? 'risk-high' : p.riskLevel === 'Sedang' ? 'risk-mid' : 'risk-low';
+  const refClass = p.referral.level === 'rujuk' ? 'risk-high' : p.referral.level === 'ringan' ? 'risk-mid' : 'risk-low';
+  return `
+    <div class="print-header">
+      <div class="pmark">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="88" height="88" rx="10" stroke="#AD5E3E" stroke-width="8"/>
+          <path d="M10 50 L50 12 L82 50 L50 88 Z" stroke="#AD5E3E" stroke-width="6" fill="none" stroke-linejoin="round"/>
+          <line x1="10" y1="50" x2="82" y2="50" stroke="#AD5E3E" stroke-width="6"/>
+        </svg>
+      </div>
+      <div>
+        <h2>WellClub Nutrition Program — Ringkasan Klien</h2>
+        <p>Rumah Atsiri Indonesia · Nutritionist-Guided Program · ${formatDate(new Date())}</p>
+      </div>
+    </div>
+    <div class="assessment-card">
+      <h4>📋 Profil Nutrisi — ${name}</h4>
+      <div class="card-sub">Program: ${categoryNames[cat]}</div>
+      <div class="assess-row"><span class="assess-label">Usia / Jenis Kelamin</span><span class="assess-val">${d.age||'-'} / ${d.gender||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">BB / TB</span><span class="assess-val">${d.weight_height||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">BMI</span><span class="assess-val">${p.bmi} – ${p.bmiStatus}</span></div>
+      <div class="assess-row"><span class="assess-label">Est. Kebutuhan Kalori</span><span class="assess-val">${p.tdee} kkal/hari</span></div>
+      <div class="assess-row"><span class="assess-label">Tekanan Darah / Gula Darah</span><span class="assess-val">${d.vitals||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Faktor Risiko</span><span class="assess-val">${d.risk_factors||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Riwayat Medis</span><span class="assess-val">${d.medical_history||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Preferensi / Pantangan Makanan</span><span class="assess-val">${d.food_pref||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Tujuan Wellness</span><span class="assess-val">${d.wellness_goal||'-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Risiko Longevity (indikatif)</span><span class="assess-val">${p.riskLevel}<span class="risk-badge ${riskClass}">${p.riskLevel}</span></span></div>
+      <div class="assess-row"><span class="assess-label">Alur Rujukan (Batas Peran)</span><span class="assess-val">${p.referral.label}<span class="risk-badge ${refClass}">${p.referral.label}</span></span></div>
+    </div>
+    ${(() => {
+      const allergyProfile = getAllergyProfile();
+      return allergyProfile.length
+        ? `<div class="disclaimer-note" style="background:#f6e7e3;border-color:rgba(181,84,63,0.35);color:#7a3a2a;margin-top:10px">⚠️ <strong>Alergi/Pantangan Terdeteksi:</strong> ${allergyProfile.map(r => r.label).join(', ')}. Seluruh Meal Plan dan Suplemen pada dokumen ini telah disesuaikan secara otomatis agar tidak memuat bahan tersebut (item yang disesuaikan ditandai 🔁). Verifikasi akhir tetap dilakukan oleh nutritionist bersertifikat.</div>`
+        : '';
+    })()}
+    ${getLifestyleCard()}
+    ${getMealPlanCard(cat)}
+    ${getFollowupCard()}
+    ${getFollowupHistoryCard()}
+    <div class="disclaimer-note" style="margin-top:14px">Dokumen ini merupakan ringkasan awal berbasis Nutrition AI Assessment dan bersifat indikatif. Rencana final akan dikonfirmasi bersama nutritionist bersertifikat WellClub sebelum program dimulai. Dokumen bukan pengganti diagnosis atau terapi medis.</div>
+  `;
+}
+
+function printSummaryReport() {
+  if (!Object.keys(assessmentData).length) {
+    addMessage('Silakan selesaikan **Nutrition Assessment** terlebih dahulu agar saya dapat menyiapkan ringkasan program yang lengkap untuk diunduh/dicetak.', false, {
+      quickReplies: ['Mulai Assessment']
+    });
+    return;
+  }
+  // Dibangun ulang setiap kali diunduh, agar riwayat check-in follow-up terbaru selalu ikut tercantum
+  const name = clientName || 'Klien';
+  const p = computeProfile();
+  lastReportHTML = buildPrintableReport(name, assessmentData, p, currentCategory);
+  document.getElementById('printSummary').innerHTML = lastReportHTML;
+  window.print();
+}
+
+// ════════════════════════════════════════════════════════════════════
+// NUTRITIONIST DASHBOARD — data klien tersimpan ke shared storage agar
+// bisa dipantau di dashboard, terlepas dari sesi chat klien yang mana.
+// Backend: Google Sheets via Google Apps Script Web App — dipilih karena
+// file ini dijalankan sebagai HTML standalone (di-download, tanpa claude.ai),
+// sehingga TIDAK bisa memakai window.storage (fitur itu hanya ada di dalam
+// artifact claude.ai). Lihat file "Code.gs" & panduan deployment terpisah
+// untuk cara membuat backend-nya di Google Sheets Anda sendiri.
+// ════════════════════════════════════════════════════════════════════
+
+// CATATAN KEAMANAN: passcode dashboard TIDAK lagi disimpan di file ini.
+// Kode di sini bisa dilihat siapa saja lewat "View Page Source", jadi kalau
+// passcode ditaruh di sini, itu bukan proteksi sama sekali. Validasi
+// passcode sekarang dilakukan di server (Code.gs) — lihat checkPasscode()
+// dan loadDashboard() di bawah.
+let nutriPasscode = ''; // disimpan sementara di memori browser setelah login berhasil
+
+// TODO WAJIB: ganti dengan URL Web App hasil deploy Google Apps Script Anda
+// (lihat panduan "Cara Deploy Backend WellClub.md"). Sebelum ini diisi,
+// aplikasi akan berjalan di "Mode Offline" dan data TIDAK tersimpan.
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzCMa65Js7IxFEC7hJKxbIwXOIp_XQhJSwApWIHX8FKa0vtouqRucBETpseC9uzig/exec'; // URL backend Apps Script (ditulis statis untuk hosting GitHub Pages)
+
+// Bungkus fetch() dengan batas waktu (default 20 detik). Tanpa ini, kalau
+// backend Apps Script "menggantung" (mis. lagi cold-start lama, atau salah
+// setting deployment), request bisa nyangkut TANPA PERNAH resolve/reject —
+// sehingga try/catch di pemanggilnya tidak pernah ketrigger dan UI terlihat
+// diam saja tanpa pesan error apa pun ke user.
+async function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs || 20000);
+  try {
+    return await fetch(url, Object.assign({}, options, { signal: controller.signal }));
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      throw new Error('Koneksi ke server backend timeout (lebih dari ' + Math.round((timeoutMs || 20000) / 1000) + ' detik tanpa respons)');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Dipanggil saat klien klik "Coba Konsultasi" di salah satu card program
+// pada landing page. Menyembunyikan landing, menampilkan chatbot, dan
+// otomatis memilih kategori yang sesuai dengan card yang diklik.
+function enterProgram(categoryKey) {
+  document.getElementById('landingPage').style.display = 'none';
+  document.getElementById('mainLayout').style.display = 'flex';
+  setCategory(categoryKey);
+}
+
+function backToLanding() {
+  document.getElementById('mainLayout').style.display = 'none';
+  document.getElementById('landingPage').style.display = 'flex';
+  closeSidebar();
+}
+
+// Sidebar kategori/tools kini berupa panel tersembunyi (drawer) agar
+// tampilan awal chat tidak penuh menu — sesuai kebutuhan UX yang lebih
+// terpandu. Dibuka lewat tombol ☰ di header, ditutup lagi otomatis
+// begitu klien memilih salah satu menu, klik di luar panel, atau tekan Esc.
+function toggleSidebar() {
+  const sb = document.getElementById('sidebarPanel');
+  if (sb.classList.contains('open')) closeSidebar(); else openSidebar();
+}
+function openSidebar() {
+  document.getElementById('sidebarPanel').classList.add('open');
+  document.getElementById('sidebarBackdrop').classList.add('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebarPanel').classList.remove('open');
+  document.getElementById('sidebarBackdrop').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+
+let storageAvailable = null; // null = belum dicek, true/false = hasil healthcheck
+let clientCreatedAt = '';    // menyimpan createdAt asli agar tidak berubah tiap auto-save
+
+// ══════════════════════════════════════════════════════════════════
+// SINKRONISASI OFFLINE-FIRST
+// Kalau koneksi internet terputus DI TENGAH sesi (mis. sinyal lemah di
+// lokasi Rumah Atsiri), jawaban klien tidak boleh hilang. Setiap kali
+// gagal terkirim ke backend, data disimpan sementara di localStorage
+// perangkat klien, lalu otomatis dikirim ulang begitu koneksi kembali —
+// tanpa klien perlu mengulang assessment dari awal.
+//
+// CATATAN PENTING (baca sebelum menganggap ini "aplikasi offline penuh"):
+// Halaman ini tetap perlu dimuat pertama kali lewat internet, karena
+// disajikan langsung oleh server Google (Apps Script). Yang bisa offline
+// adalah SESI YANG SEDANG BERJALAN setelah halaman terbuka — bukan
+// membuka link ini dari kondisi tanpa internet sama sekali. Untuk itu
+// (mode PWA "buka tanpa internet sejak awal") diperlukan Service Worker
+// terpisah — beri tahu saya kalau Anda ingin fitur itu juga ditambahkan.
+// ══════════════════════════════════════════════════════════════════
+const SYNC_QUEUE_KEY = 'wellclub_pending_sync_v1';
+
+function getSyncQueue() {
+  try { return JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+function setSyncQueue(q) {
+  try { localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(q)); } catch (e) { /* storage penuh/diblokir, abaikan */ }
+}
+// Menyimpan/menimpa payload klien tertentu di antrian (1 entri per id klien,
+// selalu snapshot TERBARU — tidak perlu riwayat tiap perubahan).
+function queuePendingSync(id, payload) {
+  const q = getSyncQueue();
+  q[id] = payload;
+  setSyncQueue(q);
+  updateOfflineBanner();
+}
+function removeFromQueue(id) {
+  const q = getSyncQueue();
+  delete q[id];
+  setSyncQueue(q);
+}
+function pendingSyncCount() { return Object.keys(getSyncQueue()).length; }
+
+function updateOfflineBanner() {
+  const banner = document.getElementById('storageStatusBanner');
+  if (!banner) return;
+  const pending = pendingSyncCount();
+  if (!navigator.onLine) {
+    banner.style.display = 'block';
+    banner.innerHTML = '📴 <strong>Anda sedang offline.</strong> Jawaban Anda tetap tersimpan di perangkat ini' + (pending ? ' (' + pending + ' data menunggu sinkronisasi)' : '') + ' dan akan otomatis terkirim ke database WellClub begitu koneksi internet kembali.';
+  } else if (pending > 0) {
+    banner.style.display = 'block';
+    banner.innerHTML = '🔄 Menyinkronkan ' + pending + ' data yang tertunda ke database WellClub...';
+  } else if (storageAvailable === false) {
+    banner.style.display = 'block'; // biarkan pesan error konfigurasi dari checkStorageHealth tetap tampil
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+// Mencoba mengirim ulang semua data yang tertunda di antrian. Dipanggil
+// otomatis saat koneksi kembali online, dan secara berkala sebagai
+// jaring pengaman (beberapa browser mobile tidak selalu memicu event
+// 'online' dengan akurat).
+let __syncing = false;
+async function flushPendingSync() {
+  if (__syncing) return;
+  if (!navigator.onLine) { updateOfflineBanner(); return; }
+  const q = getSyncQueue();
+  const ids = Object.keys(q);
+  if (ids.length === 0) { updateOfflineBanner(); return; }
+  __syncing = true;
+  updateOfflineBanner();
+  for (const id of ids) {
+    try {
+      const res = await fetchWithTimeout(WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(q[id])
+      });
+      const result = await res.json();
+      if (result && result.ok) {
+        removeFromQueue(id);
+        storageAvailable = true;
+      }
+    } catch (err) {
+      console.error('Sinkronisasi tertunda gagal untuk klien ' + id + ':', err);
+      // Berhenti mencoba sisanya kalau memang koneksi putus lagi di tengah proses
+      if (!navigator.onLine) break;
+    }
+  }
+  __syncing = false;
+  updateOfflineBanner();
+}
+
+window.addEventListener('online', flushPendingSync);
+window.addEventListener('offline', updateOfflineBanner);
+setInterval(flushPendingSync, 25000); // jaring pengaman berkala
+
+// Mengecek apakah backend (Google Apps Script Web App) bisa dihubungi.
+// Ini WAJIB agar data assessment klien benar-benar tersimpan ke database
+// nutritionist — tanpa WEBAPP_URL yang valid, data hanya ada di layar klien
+// dan hilang begitu tab/browser ditutup.
+async function checkStorageHealth() {
+  const banner = document.getElementById('storageStatusBanner');
+  if (!navigator.onLine) { updateOfflineBanner(); return; } // jangan tampilkan pesan "error konfigurasi" saat memang sedang offline
+  try {
+    if (!WEBAPP_URL || WEBAPP_URL.indexOf('PASTE_URL') !== -1) {
+      throw new Error('WEBAPP_URL belum dikonfigurasi di dalam kode');
+    }
+    const res = await fetchWithTimeout(WEBAPP_URL + '?action=ping');
+    const data = await res.json();
+    if (!data || !data.ok) throw new Error('Ping ke backend gagal');
+    storageAvailable = true;
+    banner.style.display = 'none';
+    flushPendingSync(); // kalau ada sisa antrian dari sesi offline sebelumnya, kirim sekarang
+  } catch (err) {
+    storageAvailable = false;
+    console.error('Storage healthcheck gagal:', err);
+    banner.style.display = 'block';
+    banner.innerHTML = '⚠️ <strong>Mode Offline:</strong> Halaman ini belum terhubung ke database nutritionist (backend Google Sheets belum dikonfigurasi / URL belum diisi / sedang tidak bisa diakses). Hasil assessment Anda <strong>tidak akan otomatis tersimpan</strong> — silakan gunakan tombol "Unduh Ringkasan Program" dan kirimkan manual ke tim WellClub.';
+  }
+}
+
+async function saveClientData() {
+  if (!currentClientId) return false; // belum ada ID (kontak belum diisi)
+  if (!clientCreatedAt) clientCreatedAt = new Date().toISOString();
+  const isComplete = assessmentStep >= assessmentQuestions.length;
+  const payload = {
+    id: currentClientId,
+    // Simpan NAMA LENGKAP (jawaban asli user) ke database — clientName
+    // cuma nama depan yang dipakai untuk sapaan di chat, bukan untuk disimpan.
+    name: assessmentData.name || clientName || 'Klien',
+    contact: assessmentData.contact || '-',
+    category: currentCategory,
+    assessmentData: assessmentData,
+    profile: computeProfile(),
+    followUpHistory: followUpHistory,
+    isComplete: isComplete,
+    createdAt: clientCreatedAt,
+    updatedAt: new Date().toISOString()
+  };
+
+  // Sedang diketahui offline: langsung antrikan tanpa mencoba fetch dulu
+  // (menghindari delay timeout yang tidak perlu), lalu berhenti di sini.
+  if (!navigator.onLine) {
+    queuePendingSync(currentClientId, payload);
+    return true; // dianggap "tersimpan" (di perangkat), akan disinkron otomatis nanti
+  }
+  if (storageAvailable === false && pendingSyncCount() === 0) {
+    // backend memang belum terkonfigurasi (bukan sekadar putus koneksi) — tetap
+    // antrikan sebagai jaring pengaman, siapa tahu nanti WEBAPP_URL diperbaiki.
+    queuePendingSync(currentClientId, payload);
+    return false;
+  }
+  try {
+    // Content-Type text/plain dipakai supaya browser TIDAK mengirim CORS
+    // preflight (OPTIONS) — Google Apps Script Web App tidak bisa merespons
+    // preflight, jadi body JSON tetap dikirim sebagai "simple request" lalu
+    // di-parse manual sebagai JSON di sisi Apps Script (lihat Code.gs).
+    const res = await fetchWithTimeout(WEBAPP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (!result || !result.ok) throw new Error((result && result.error) || 'Simpan gagal, respons backend tidak valid');
+    storageAvailable = true;
+    removeFromQueue(currentClientId); // kalau sebelumnya sempat tertunda, sekarang sudah berhasil
+    updateOfflineBanner();
+    return true;
+  } catch (err) {
+    console.error('Gagal menyimpan data klien ke backend:', err);
+    storageAvailable = false;
+    // Simpan ke antrian lokal alih-alih langsung menyerah — kemungkinan
+    // besar ini koneksi terputus sesaat, bukan kesalahan permanen.
+    queuePendingSync(currentClientId, payload);
+    const banner = document.getElementById('storageStatusBanner');
+    if (banner && navigator.onLine) {
+      banner.style.display = 'block';
+      banner.innerHTML = '⚠️ <strong>Gagal tersambung ke database nutritionist.</strong> Jawaban Anda tetap tersimpan di perangkat ini dan akan dicoba kirim ulang otomatis. Kalau berlanjut, gunakan tombol "Unduh Ringkasan Program" dan kirimkan ke tim WellClub secara manual.';
+    }
+    return false;
+  }
+}
+
+function openNutritionistGate() {
+  document.getElementById('passcodeInput').value = '';
+  document.getElementById('passcodeError').textContent = '';
+  const overlay = document.getElementById('dashboardOverlay');
+  overlay.style.display = 'flex';
+  setTimeout(() => document.getElementById('passcodeInput').focus(), 100);
+}
+
+function closeNutritionistGate() {
+  document.getElementById('dashboardOverlay').style.display = 'none';
+}
+
+async function checkPasscode() {
+  const val = document.getElementById('passcodeInput').value;
+  const errEl = document.getElementById('passcodeError');
+  errEl.textContent = 'Memeriksa...';
+  try {
+    // Passcode diverifikasi oleh SERVER (Code.gs), bukan dibandingkan di
+    // browser — supaya passcode-nya tidak kelihatan lewat "View Page Source".
+    const res = await fetchWithTimeout(WEBAPP_URL + '?action=list&passcode=' + encodeURIComponent(val));
+    const data = await res.json();
+    if (data && data.ok) {
+      nutriPasscode = val; // simpan untuk dipakai lagi saat klik Refresh di dashboard
+      errEl.textContent = '';
+      closeNutritionistGate();
+      enterDashboard(data.clients || []);
+    } else {
+      errEl.textContent = 'Kode akses salah. Coba lagi.';
+    }
+  } catch (err) {
+    errEl.textContent = 'Gagal menghubungi server. Coba lagi.';
+    console.error(err);
+  }
+}
+
+function enterDashboard(clientsFromLogin) {
+  document.querySelector('.main-layout').style.display = 'none';
+  document.getElementById('dashboardView').style.display = 'flex';
+  document.getElementById('clientDetailPanel').style.display = 'none';
+  if (clientsFromLogin) {
+    clientsFromLogin.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    renderDashboard(clientsFromLogin);
+  } else {
+    loadDashboard();
+  }
+}
+
+function exitDashboard() {
+  document.getElementById('dashboardView').style.display = 'none';
+  document.querySelector('.main-layout').style.display = 'flex';
+}
+
+async function loadDashboard() {
+  const tbody = document.getElementById('clientTableBody');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#9a9590;">Memuat data klien...</td></tr>';
+  try {
+    if (!WEBAPP_URL || WEBAPP_URL.indexOf('PASTE_URL') !== -1) {
+      throw new Error('WEBAPP_URL belum dikonfigurasi');
+    }
+    const res = await fetchWithTimeout(WEBAPP_URL + '?action=list&passcode=' + encodeURIComponent(nutriPasscode));
+    const data = await res.json();
+    if (!data || !data.ok) throw new Error((data && data.error) || 'Respons backend tidak valid');
+    const clients = data.clients || [];
+    clients.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    renderDashboard(clients);
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#b5543f;">Gagal memuat data klien dari backend. Pastikan WEBAPP_URL sudah diisi dengan benar dan Apps Script sudah di-deploy. Coba klik Refresh.</td></tr>';
+    console.error(err);
+  }
+}
+
+function computeNextFollowupDate(client) {
+  const hist = client.followUpHistory || [];
+  const baseDate = hist.length ? new Date(hist[hist.length - 1].date) : new Date(client.createdAt);
+  const next = new Date(baseDate);
+  next.setMonth(next.getMonth() + 1);
+  return next;
+}
+
+function renderDashboard(clients) {
+  window.__dashClients = clients; // cache untuk lookup detail
+  const today = new Date();
+  const stats = { total: clients.length, tinggi: 0, sedang: 0, dueSoon: 0 };
+
+  clients.forEach(c => {
+    const risk = (c.profile && c.profile.riskLevel) || 'Rendah';
+    if (risk === 'Tinggi') stats.tinggi++;
+    else if (risk === 'Sedang') stats.sedang++;
+    const next = computeNextFollowupDate(c);
+    const diffDays = Math.ceil((next - today) / (1000 * 60 * 60 * 24));
+    if (diffDays <= 7) stats.dueSoon++;
+  });
+
+  document.getElementById('dashStats').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${stats.total}</div><div class="stat-label">Total Klien</div></div>
+    <div class="stat-card risk-high"><div class="stat-num">${stats.tinggi}</div><div class="stat-label">Risiko Tinggi</div></div>
+    <div class="stat-card risk-mid"><div class="stat-num">${stats.sedang}</div><div class="stat-label">Risiko Sedang</div></div>
+    <div class="stat-card"><div class="stat-num">${stats.dueSoon}</div><div class="stat-label">Follow-up ≤ 7 Hari</div></div>
+  `;
+
+  const tbody = document.getElementById('clientTableBody');
+  if (!clients.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#9a9590;">Belum ada data klien. Data akan muncul otomatis setelah klien menyelesaikan Nutrition Assessment.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = clients.map(c => {
+    const risk = (c.profile && c.profile.riskLevel) || '-';
+    const riskClass = risk === 'Tinggi' ? 'risk-high' : risk === 'Sedang' ? 'risk-mid' : 'risk-low';
+    const hist = c.followUpHistory || [];
+    const lastCheckin = hist.length
+      ? formatDate(new Date(hist[hist.length - 1].date))
+      : formatDate(new Date(c.createdAt)) + ' (assessment awal)';
+    const next = computeNextFollowupDate(c);
+    const diffDays = Math.ceil((next - today) / (1000 * 60 * 60 * 24));
+    const overdue = diffDays < 0;
+    const nextLabel = overdue ? `Terlambat ${Math.abs(diffDays)} hari` : formatDate(next);
+    const statusBadge = c.isComplete === false
+      ? `<br><span class="risk-badge risk-mid" style="margin-top:3px;display:inline-block">⏳ Assessment Belum Selesai</span>`
+      : '';
+    return `<tr>
+      <td><strong>${c.name}</strong><br><span class="muted-sm">${c.contact || '-'}</span>${statusBadge}</td>
+      <td>${categoryNames[c.category] || c.category}</td>
+      <td><span class="risk-badge ${riskClass}">${risk}</span></td>
+      <td>${lastCheckin}</td>
+      <td class="${overdue ? 'overdue-text' : ''}">${nextLabel}</td>
+      <td><button class="detail-btn" onclick="viewClientDetail('${c.id}')">Lihat Detail</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function viewClientDetail(id) {
+  const clients = window.__dashClients || [];
+  const c = clients.find(x => x.id === id);
+  if (!c) return;
+
+  const d = c.assessmentData || {};
+  const p = c.profile || {};
+  const riskClass = p.riskLevel === 'Tinggi' ? 'risk-high' : p.riskLevel === 'Sedang' ? 'risk-mid' : 'risk-low';
+  const refClass = p.referral && p.referral.level === 'rujuk' ? 'risk-high' : p.referral && p.referral.level === 'ringan' ? 'risk-mid' : 'risk-low';
+
+  const histRows = (c.followUpHistory || []).map(e => `
+    <div class="followup-step">
+      <div class="fu-badge">Sesi ${e.sesi}</div>
+      <div><strong>${formatDate(new Date(e.date))} — BB: ${e.weight_now || '-'} kg</strong><span>Tidur: ${e.sleep_quality_now || '-'} · Stres: ${e.stress_now || '-'} · Kepatuhan: ${e.adherence || '-'} · Kendala: ${e.obstacles || '-'}</span></div>
+    </div>`).join('') || '<div class="muted-sm" style="padding:8px 0;">Belum ada sesi follow-up tercatat.</div>';
+
+  const panel = document.getElementById('clientDetailPanel');
+  panel.innerHTML = `
+    <div class="detail-header">
+      <h3>${c.name} <span class="muted-sm">(${c.contact || '-'})</span></h3>
+      <button class="detail-close" onclick="closeClientDetail()">✕ Tutup</button>
+    </div>
+    <div class="assessment-card">
+      <h4>📋 Profil Nutrisi</h4>
+      <div class="card-sub">Program: ${categoryNames[c.category] || c.category} · Terakhir diperbarui: ${formatDate(new Date(c.updatedAt))}</div>
+      <div class="assess-row"><span class="assess-label">Usia / Jenis Kelamin</span><span class="assess-val">${d.age || '-'} / ${d.gender || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">BB / TB (awal)</span><span class="assess-val">${d.weight_height || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">BMI</span><span class="assess-val">${p.bmi || '-'} – ${p.bmiStatus || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Est. Kalori</span><span class="assess-val">${p.tdee || '-'} kkal/hari</span></div>
+      <div class="assess-row"><span class="assess-label">Tekanan Darah / Gula Darah (awal)</span><span class="assess-val">${d.vitals || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Faktor Risiko</span><span class="assess-val">${d.risk_factors || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Riwayat Medis</span><span class="assess-val">${d.medical_history || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Tujuan Wellness</span><span class="assess-val">${d.wellness_goal || '-'}</span></div>
+      <div class="assess-row"><span class="assess-label">Risiko Longevity</span><span class="assess-val">${p.riskLevel || '-'}<span class="risk-badge ${riskClass}">${p.riskLevel || '-'}</span></span></div>
+      <div class="assess-row"><span class="assess-label">Alur Rujukan</span><span class="assess-val">${(p.referral && p.referral.label) || '-'}<span class="risk-badge ${refClass}">${(p.referral && p.referral.label) || '-'}</span></span></div>
+    </div>
+    <div class="followup-card" style="margin-top:12px">
+      <h4>🗂️ Riwayat Follow-up (${(c.followUpHistory || []).length} sesi)</h4>
+      ${histRows}
+    </div>
+  `;
+  panel.style.display = 'block';
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeClientDetail() {
+  document.getElementById('clientDetailPanel').style.display = 'none';
+}
+
+checkStorageHealth();
+
+setTimeout(() => {
+  addMessage('Selamat datang di **WellClub Nutrition Program** 🌿\n\nSaya adalah Nutrition AI Assistant Rumah Atsiri Indonesia, siap membantu Anda melakukan **Nutrition Assessment** dan menyusun **Personal Meal Plan** yang dipantau oleh nutritionist kami — mencakup 3 pilar program: **Wellness Lifestyle**, **Mental Wellness** (Better Sleep & Recharge and Rebalance), serta **Longevity** (Stroke, Diabetes, Hipertensi).\n\nPilih kategori program di sidebar kiri, atau langsung mulai assessment untuk hasil yang lebih personal.', false, {
+    quickReplies: ['Mulai Assessment', 'Wellness Lifestyle', 'Mental Wellness', 'Longevity Program']
+  });
+}, 500);
+</script>
+</body>
+</html>
